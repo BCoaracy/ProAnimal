@@ -1,4 +1,13 @@
 <router-outlet>
-  <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
   <mat-toolbar color="primary">Pro Animal</mat-toolbar>
+  <mat-toolbar>
+    <span>Consultar Chip</span>
+  </mat-toolbar>
+  <mat-divider>
+  </mat-divider>
+    <mat-form-field appearance="fill" color = "primary">
+      <mat-label>Numero do MicroChip</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <button mat-fab><mat-icon svgIcon="left-arrow"></mat-icon></button>
 </router-outlet>
