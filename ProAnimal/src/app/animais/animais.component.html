@@ -1,1 +1,21 @@
-<p>animais works!</p>
+<mat-toolbar color="primary">Pro Animal</mat-toolbar>
+  <mat-toolbar>
+    <span>Consultar Chip</span>
+  </mat-toolbar>
+  <mat-divider>
+  </mat-divider>
+  <mat-form-field (ngModel)="microChip" appearance="fill" color="primary">
+    <mat-label>Numero do MicroChip</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <button mat-mini-fab (click)="this.getAnimalControle(0);">
+    <mat-icon>search</mat-icon>
+  </button>
+  <mat-divider></mat-divider>
+  <mat-form-field appearance="fill" color="primary">
+    <p *ngFor="let item of animal | async">
+      {{ item.Nome }} {{microChip}}
+    </p>
+    <input matInput placeholder="Nome" value="">
+  </mat-form-field>

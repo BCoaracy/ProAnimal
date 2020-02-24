@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimaisComponent } from './animais/animais.component';
+import { AnimaisService } from './shared/animais.service';
 
 
 
@@ -41,7 +42,7 @@ import { AnimaisComponent } from './animais/animais.component';
     MatIconModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AnimaisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
