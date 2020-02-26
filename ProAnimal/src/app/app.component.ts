@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
 
   //animal = new Animais();
 
-  microChip: any;
 
   constructor(
     private db: AngularFirestore

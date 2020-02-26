@@ -8,6 +8,7 @@ import { AnimaisService } from '../shared/animais.service';
 })
 export class AnimaisComponent implements OnInit {
 
+  public microchip = "0";
   constructor(
     private _animaisService: AnimaisService
   ) { }

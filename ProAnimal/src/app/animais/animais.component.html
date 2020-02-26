@@ -8,14 +8,15 @@
     <mat-label>Numero do MicroChip</mat-label>
     <input matInput>
   </mat-form-field>
-
+  
   <button mat-mini-fab (click)="this.getAnimalControle(0);">
     <mat-icon>search</mat-icon>
   </button>
   <mat-divider></mat-divider>
   <mat-form-field appearance="fill" color="primary">
-    <p *ngFor="let item of animal | async">
+    
+    <!-- <p *ngFor="let item of animal | async">
       {{ item.Nome }} {{microChip}}
-    </p>
-    <input matInput placeholder="Nome" value="">
+    </p> -->
+    <input matInput placeholder="Nome">
   </mat-form-field>

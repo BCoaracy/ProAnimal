@@ -19,13 +19,17 @@ import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimaisComponent } from './animais/animais.component';
 import { AnimaisService } from './shared/animais.service';
+import { VacinasComponent } from './vacinas/vacinas.component';
+import { DoencasComponent } from './doencas/doencas.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnimaisComponent
+    AnimaisComponent,
+    VacinasComponent,
+    DoencasComponent
   ],
   imports: [
     BrowserModule,

@@ -1,26 +1,6 @@
-<app-animais></app-animais>
-
-
-<!-- <router-outlet>
-  <mat-toolbar color="primary">Pro Animal</mat-toolbar>
-  <mat-toolbar>
-    <span>Consultar Chip</span>
-  </mat-toolbar>
-  <mat-divider>
-  </mat-divider>
-  <mat-form-field (ngModel)="microChip" appearance="fill" color="primary">
-    <mat-label>Numero do MicroChip</mat-label>
-    <input matInput>
-  </mat-form-field>
-
-  <button mat-mini-fab (click)="this.searchAnimals(microChip);">
-    <mat-icon>search</mat-icon>
-  </button>
-  <mat-divider></mat-divider>
-  <mat-form-field appearance="fill" color="primary">
-    <p *ngFor="let item of animal | async">
-      {{ item.Nome }} {{microChip}}
-    </p>
-    <input matInput placeholder="Nome" value="">
-  </mat-form-field>
-</router-outlet> -->
+<nav>
+  <a routerLink="/animais" routerLinkActive="active" >Animais</a>
+  <a routerLink="/vacinas" routerLinkActive="active" >Vacinas</a>
+  <a routerLink="doencas" routerLinkActive="router-link-active" >Doencas</a>
+</nav>
+<router-outlet></router-outlet>
