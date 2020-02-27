@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../shared/animais.service';
+import { Animais } from './animais';
 
 @Component({
   selector: 'app-animais',
@@ -9,15 +10,16 @@ import { AnimaisService } from '../shared/animais.service';
 export class AnimaisComponent implements OnInit {
 
   public microchip = "0";
+  private animal: Animais;
   constructor(
-    private _animaisService: AnimaisService
+    public _animaisService: AnimaisService
   ) { }
 
   ngOnInit() {
   }
 
   public getAnimalControle(idChip: number){
-    return this._animaisService.getAnimal(idChip);
+    this.animal = this._animaisService.getAnimal(idChip);
   }
 
 }

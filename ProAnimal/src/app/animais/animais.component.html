@@ -1,6 +1,6 @@
-<mat-toolbar color="primary">Pro Animal</mat-toolbar>
-  <mat-toolbar>
-    <span>Consultar Chip</span>
+<!-- <mat-toolbar color="primary">Pro Animal</mat-toolbar> -->
+  <mat-toolbar color='primary'>
+    Consultar Cadastro
   </mat-toolbar>
   <mat-divider>
   </mat-divider>
@@ -9,14 +9,16 @@
     <input matInput>
   </mat-form-field>
   
-  <button mat-mini-fab (click)="this.getAnimalControle(0);">
+  <button mat-mini-fab (click)="getAnimalControle(0)">
     <mat-icon>search</mat-icon>
   </button>
+  <button mat-button (click)="_animaisService.updateAnimal('Nome', 'Browniezim')" color="primary">Teste Update</button>
   <mat-divider></mat-divider>
   <mat-form-field appearance="fill" color="primary">
-    
-    <!-- <p *ngFor="let item of animal | async">
+    <!-- {{animal.Nome}} -->
+        
+    <p *ngFor="let item of animal | async">
       {{ item.Nome }} {{microChip}}
-    </p> -->
-    <input matInput placeholder="Nome">
+    </p> 
+    <input matInput>
   </mat-form-field>
