@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../shared/animais.service';
 import { Animais } from './animais';
+//import { Animais } from '../models/animais.model';
 
 @Component({
   selector: 'app-animais',
@@ -8,18 +9,30 @@ import { Animais } from './animais';
   styleUrls: ['./animais.component.css']
 })
 export class AnimaisComponent implements OnInit {
-
-  public microchip = "0";
-  private animal: Animais;
+  animal: Animais = {IdChip: '',
+  Tutor: '',
+  DataNasc: null,
+  Especie: '',
+  Nome: '',
+  Observacoes: '',
+  Raca: '',
+  Tamanho: '',
+};
   constructor(
-    public _animaisService: AnimaisService
+    private _animaisService: AnimaisService
   ) { }
 
   ngOnInit() {
+    
   }
 
-  public getAnimalControle(idChip: number){
-    this.animal = this._animaisService.getAnimal(idChip);
+  public getAnimalControle(idChip: string){
+    this.animal = this._animaisService.get(idChip);
   }
+
+  public updateAnimal(property: string, value: any){
+    //this._animaisService.updateAnimal(this.)
+  }
+  
 
 }

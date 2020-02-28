@@ -1,5 +1,5 @@
 export interface Animais {
-  Id_chip: number;
+  Id_chip: string;
   Tutor: string;
   Data_Nasc: Date;
   Especie: string;
