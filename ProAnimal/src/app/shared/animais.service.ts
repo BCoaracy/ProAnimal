@@ -44,7 +44,7 @@ export class AnimaisService {
     return this.animaisRef.doc<Animais>(IdChip).valueChanges();
   }
 
-  getAnimal(chipAnimal: number) {
+  getAnimal(chipAnimal: string) {
     return this.db.collection<Animais>('animais', ref => ref.where('Id_chip', '==', chipAnimal) && ref.limit(1)).valueChanges();
   }
 }
