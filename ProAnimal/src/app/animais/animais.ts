@@ -7,15 +7,5 @@ export class Animais {
     Observacoes: string;
     Raca: string;
     Tamanho: string;
-
-    constructor(
-        IdChip: string,
-        Tutor: string,
-        DataNasc: Date,
-        Especie: string,
-        Nome: string,
-        Observacoes: string,
-        Raca: string,
-        Tamanho: string
-    ) { }
+    Ocorrencias: any[];
 }

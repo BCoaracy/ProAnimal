@@ -18,13 +18,79 @@
     <mat-icon>search</mat-icon>
   </button>
   <!-- <button mat-button (click)="_animaisService.updateAnimal('nome', 'Browniezim')" color="primary">Teste Update</button> -->
-  <button mat-button (click)="testeUpdate()" color="primary">Teste Update</button>
+  <button mat-button (click)="updateAnimal('oi', 1)" color="primary">Teste Update</button>
   <mat-divider></mat-divider>
-  <mat-form-field appearance="fill" color="primary">
-    <!-- {{animal.Nome}} -->
-        
-    <p *ngFor="let item of animal | async">
-      {{ item.Nome }} {{microChip}}
-    </p> 
-    <input matInput>
-  </mat-form-field>
+  
+  <p>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Nome:</mat-label>
+      <input
+      type="text"
+      matInput
+      [(ngModel)]="animal.Nome"
+      required>
+    </mat-form-field>
+  </p>
+  <p>    
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Data de Nascimento:</mat-label>
+      <input
+      type="date"
+      matInput
+      [(ngModel)]="animal.DataNasc"
+      required>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Raca:</mat-label>
+      <input
+      type="text"
+      matInput
+      [(ngModel)]="animal.Raca"
+      required>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Tamanho:</mat-label>
+      <input
+      type="text"
+      matInput
+      [(ngModel)]="animal.Tamanho"
+      required>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Especie:</mat-label>
+      <input
+      type="text"
+      matInput
+      [(ngModel)]="animal.Especie"
+      required>
+    </mat-form-field>
+  </p>
+  <p>    
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Tutor:</mat-label>
+      <input
+      type="text"
+      matInput
+      [(ngModel)]="animal.Tutor"
+      required>
+    </mat-form-field>
+  </p>
+  <p>    
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Observações:</mat-label>
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="animal.Observacoes"
+        >
+    </mat-form-field>
+  </p>
+  
+    
+  

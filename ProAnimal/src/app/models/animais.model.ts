@@ -1,7 +1,7 @@
-export interface Animais {
-  Id_chip: string;
+export interface iAnimais {
+  IdChip: string;
   Tutor: string;
-  Data_Nasc: Date;
+  DataNasc: Date;
   Especie: string;
   Nome: string;
   Observacoes: string;

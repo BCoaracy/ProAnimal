@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Animais } from '../animais/animais';
 import { Observable } from 'rxjs';
+import { iAnimais } from '../models/animais.model';
 
 @Injectable()
 
 export class AnimaisService {
 
   private dbPath = '/animais';
+
+  private oAnimal$: Observable<Animais>;
+  private iAnimal$: Observable<iAnimais>;
 
   animaisRef: AngularFirestoreCollection<Animais> ;
 
@@ -25,7 +29,8 @@ export class AnimaisService {
           Nome: a.Nome,
           Observacoes: a.Observacoes,
           Raca: a.Raca,
-          Tamanho: a.Tamanho
+          Tamanho: a.Tamanho,
+          Ocorrencias: a.Ocorrencias
     });
     // this.animaisRef.add(animal);
   }
