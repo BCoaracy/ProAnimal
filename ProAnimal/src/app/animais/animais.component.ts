@@ -27,17 +27,35 @@ constructor(
     private _animaisService: AnimaisService
   ) { }
 
-  ngOnInit() {  }
+  ngOnInit() { this.showAnimalConsole(); }
 
   public getAnimalControle(idChip: string){
-     //= this._animaisService.getAnimal(idChip);
-    console.log('pega o bicho');
+    this.animal = this._animaisService.get(idChip);
+    console.log(this.animal);
   }
 
-  public updateAnimal(property: string, value: any){
+  public updateAnimal(property: string, value: any) {
     console.log('updata o bicho');
-    //this._animaisService.updateAnimal(this.animal);
+    this._animaisService.updateAnimal(this.animal);
   }
-  
+
+  public salvaAnimal() {
+    this._animaisService.createAnimal(this.animal);
+  }
+
+  public showAnimalConsole(){
+    console.log(this.animal);
+    console.log('pega o bicho\n' + this.animal.Nome + '\n'
+      + this.animal.IdChip + '\n'
+      + this.animal.Tutor + '\n'
+      + this.animal.DataNasc + '\n'
+      + this.animal.Especie + '\n'
+      + this.animal.Nome + '\n'
+      + this.animal.Observacoes + '\n'
+      + this.animal.Raca + '\n'
+      + this.animal.Tamanho + '\n'
+      + this.animal.Ocorrencias + '\n'
+    );
+  }
 
 }

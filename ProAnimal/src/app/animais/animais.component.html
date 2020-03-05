@@ -1,4 +1,3 @@
-<!-- <mat-toolbar color="primary">Pro Animal</mat-toolbar> -->
   <mat-toolbar color='primary'>
     Consultar Cadastro
   </mat-toolbar>
@@ -11,14 +10,13 @@
     matInput
     [(ngModel)]="animal.IdChip"
     (keyup.enter)="getAnimalControle(animal.IdChip)"
-    required>
+    required
+    #saveControl="ngModel">
   </mat-form-field>
   
   <button mat-mini-fab (click)="getAnimalControle(animal.IdChip)">
     <mat-icon>search</mat-icon>
   </button>
-  <!-- <button mat-button (click)="_animaisService.updateAnimal('nome', 'Browniezim')" color="primary">Teste Update</button> -->
-  <button mat-button (click)="updateAnimal('oi', 1)" color="primary">Teste Update</button>
   <mat-divider></mat-divider>
   
   <p>
@@ -28,7 +26,10 @@
       type="text"
       matInput
       [(ngModel)]="animal.Nome"
-      required>
+      required
+      minlength="3"
+      #saveControl="ngModel"
+      >
     </mat-form-field>
   </p>
   <p>    
@@ -38,7 +39,8 @@
       type="date"
       matInput
       [(ngModel)]="animal.DataNasc"
-      required>
+      required
+      #saveControl="ngModel">
     </mat-form-field>
   </p>
   <p>
@@ -48,7 +50,8 @@
       type="text"
       matInput
       [(ngModel)]="animal.Raca"
-      required>
+      required
+      #saveControl="ngModel">
     </mat-form-field>
   </p>
   <p>
@@ -58,7 +61,8 @@
       type="text"
       matInput
       [(ngModel)]="animal.Tamanho"
-      required>
+      required
+      #saveControl="ngModel">
     </mat-form-field>
   </p>
   <p>
@@ -68,7 +72,8 @@
       type="text"
       matInput
       [(ngModel)]="animal.Especie"
-      required>
+      required
+      #saveControl="ngModel">
     </mat-form-field>
   </p>
   <p>    
@@ -78,7 +83,10 @@
       type="text"
       matInput
       [(ngModel)]="animal.Tutor"
-      required>
+      required
+      #saveControl="ngModel"
+      minlength="11"
+      maxlength="11">
     </mat-form-field>
   </p>
   <p>    
@@ -91,6 +99,7 @@
         >
     </mat-form-field>
   </p>
+  <button class="rbButton" mat-fab [disabled]="saveControl.invalid" (click)="salvaAnimal()"><mat-icon>add</mat-icon></button>
   
     
   

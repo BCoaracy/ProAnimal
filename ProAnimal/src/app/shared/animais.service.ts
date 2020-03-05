@@ -10,7 +10,7 @@ export class AnimaisService {
 
   private dbPath = '/animais';
 
-  private oAnimal$: Observable<Animais>;
+  private oAnimal: Animais;
   private iAnimal$: Observable<iAnimais>;
 
   animaisRef: AngularFirestoreCollection<Animais> ;
@@ -20,9 +20,11 @@ export class AnimaisService {
   }
 
   createAnimal(a: Animais): Promise<void> {
-    const Id_chip = this.db.createId();
-    return this.animaisRef.doc<Animais>(Id_chip)
-    .set({IdChip: Id_chip,
+    // const Id_chip = this.db.createId();
+    // const Id_chip = a.IdChip
+    return this.animaisRef.doc<Animais>(a.IdChip)
+    // return this.animaisRef.doc<Animais>()
+    .set({IdChip: a.IdChip,
           Tutor: a.Tutor,
           DataNasc: a.DataNasc,
           Especie: a.Especie,
@@ -31,6 +33,12 @@ export class AnimaisService {
           Raca: a.Raca,
           Tamanho: a.Tamanho,
           Ocorrencias: a.Ocorrencias
+    })
+    .then(function() {
+        console.log('Document successfully written!');
+    })
+    .catch(function(error) {
+        console.error('Error writing document: ', error);
     });
     // this.animaisRef.add(animal);
   }
@@ -46,10 +54,13 @@ export class AnimaisService {
   }
 
   get(IdChip: string): Observable<Animais> {
-    return this.animaisRef.doc<Animais>(IdChip).valueChanges();
+    let a = this.animaisRef.doc<Animais>(IdChip).valueChanges();
+    return a[0];
   }
 
-  getAnimal(chipAnimal: string) {
-    return this.db.collection<Animais>('animais', ref => ref.where('Id_chip', '==', chipAnimal) && ref.limit(1)).valueChanges();
+  getAnimal(chipAnimal: string): Observable<Animais> {
+    let a = this.db.collection<Animais>('animais', ref => ref.where('IdChip', '==', chipAnimal) && ref.limit(1)).valueChanges();
+    return a[0];
   }
 }
+
