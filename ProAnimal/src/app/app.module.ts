@@ -21,6 +21,9 @@ import { AnimaisComponent } from './animais/animais.component';
 import { AnimaisService } from './shared/animais.service';
 import { VacinasComponent } from './vacinas/vacinas.component';
 import { DoencasComponent } from './doencas/doencas.component';
+import { TutoresComponent } from './tutores/tutores.component';
+import { VeterinariosComponent } from './veterinarios/veterinarios.component';
+
 
 
 
@@ -29,7 +32,9 @@ import { DoencasComponent } from './doencas/doencas.component';
     AppComponent,
     AnimaisComponent,
     VacinasComponent,
-    DoencasComponent
+    DoencasComponent,
+    TutoresComponent,
+    VeterinariosComponent
   ],
   imports: [
     BrowserModule,
