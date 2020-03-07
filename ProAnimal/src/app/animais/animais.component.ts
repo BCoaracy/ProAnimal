@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../shared/animais.service';
 import { Animais } from './animais';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
-//import { Animais } from '../models/animais.model';
+import { async } from '@angular/core/testing';
+import { iAnimais } from '../models/animais.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-animais',
@@ -21,6 +23,7 @@ export class AnimaisComponent implements OnInit {
     Tamanho: '',
     Ocorrencias: null,
   };
+  
   a: AngularFirestoreCollection<Animais>;
 
 constructor(
@@ -30,8 +33,7 @@ constructor(
   ngOnInit() { this.showAnimalConsole(); }
 
   public getAnimalControle(idChip: string){
-    this.animal = this._animaisService.get(idChip);
-    console.log(this.animal);
+    this.animal.IdChip = this._animaisService.getAnimal(idChip);
   }
 
   public updateAnimal(property: string, value: any) {
