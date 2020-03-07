@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./animais.component.css']
 })
 export class AnimaisComponent implements OnInit {
+
+  animal$: Observable<iAnimais[]>;
+
   animal: Animais = {
     IdChip: '',
     Tutor: '',
@@ -23,17 +26,18 @@ export class AnimaisComponent implements OnInit {
     Tamanho: '',
     Ocorrencias: null,
   };
-  
+
   a: AngularFirestoreCollection<Animais>;
 
-constructor(
+  constructor(
     private _animaisService: AnimaisService
   ) { }
 
   ngOnInit() { this.showAnimalConsole(); }
 
-  public getAnimalControle(idChip: string){
-    this.animal.IdChip = this._animaisService.getAnimal(idChip);
+  public getAnimalControle(idChip: string) {
+    this.animal$ = this._animaisService.getAnimal(idChip)[0];
+    console.log(this.animal$);
   }
 
   public updateAnimal(property: string, value: any) {
@@ -45,7 +49,7 @@ constructor(
     this._animaisService.createAnimal(this.animal);
   }
 
-  public showAnimalConsole(){
+  public showAnimalConsole() {
     console.log(this.animal);
     console.log('pega o bicho\n' + this.animal.Nome + '\n'
       + this.animal.IdChip + '\n'

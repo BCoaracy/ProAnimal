@@ -1,7 +1,7 @@
 export interface Vermigugos {
-  Id_vermigugos: number;
+  IdVermigugos: number;
   Nome: string;
-  Numero_lote: number;
-  data_proc: Date;
-  data_retorno: Date;
+  NumeroLote: number;
+  dataProc: Date;
+  dataRetorno: Date;
 }

@@ -1,7 +1,6 @@
-export interface Doenca {
-  IdDoenca: number;
+export interface Vacinas {
+  IdVacinas: number;
   Nome: string;
-  zoonose: boolean;
   NumeroLote: number;
   dataProc: Date;
   dataRetorno: Date;

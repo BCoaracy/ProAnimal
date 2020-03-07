@@ -1,2 +1,6 @@
-<p>vacinas works!</p>
-<a routerLink="/principal" routerLinkActive="active" >Principal</a>
+<mat-toolbar color="primary">
+  <span>Cadastro de Vacinas</span>
+</mat-toolbar>
+<mat-form-field appearance="outline" color="primary">
+  <input type="text" matInput [(ngModel)]="vacina.Nome" (keyup.enter)="salvarVacina()" #saveControl="ngModel">
+</mat-form-field>

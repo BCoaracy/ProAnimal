@@ -1,7 +1,7 @@
 export interface Tutores {
   cpf: string;
   Nome: string;
-  Data_nasc: Date;
+  DataNasc: Date;
   Bloqueado: boolean;
   Impedido: boolean;
 }

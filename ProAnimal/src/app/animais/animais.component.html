@@ -1,105 +1,62 @@
-  <mat-toolbar color='primary'>
-    Consultar Cadastro
-  </mat-toolbar>
-  <mat-divider>
-  </mat-divider>
-  <mat-form-field appearance="fill" color="primary">
-    <mat-label>Numero do MicroChip</mat-label>
-    <input 
-    type="text" 
-    matInput
-    [(ngModel)]="animal.IdChip"
-    (keyup.enter)="getAnimalControle(animal.IdChip)"
-    required
+<mat-toolbar color='primary'>
+  Consultar Cadastro
+</mat-toolbar>
+<mat-divider>
+</mat-divider>
+<mat-form-field appearance="fill" color="primary">
+  <mat-label>Numero do MicroChip</mat-label>
+  <input type="text" matInput [(ngModel)]="animal.IdChip" (keyup.enter)="getAnimalControle(animal.IdChip)"
     #saveControl="ngModel">
+</mat-form-field>
+
+<button mat-mini-fab (click)="getAnimalControle(animal.IdChip)">
+  <mat-icon>search</mat-icon>
+</button>
+<mat-divider></mat-divider>
+
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Nome:</mat-label>
+    <input type="text" matInput [(ngModel)]="animal.Nome" required minlength="3" #saveControl="ngModel">
   </mat-form-field>
-  
-  <button mat-mini-fab (click)="getAnimalControle(animal.IdChip)">
-    <mat-icon>search</mat-icon>
-  </button>
-  <mat-divider></mat-divider>
-  
-  <p>
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Nome:</mat-label>
-      <input
-      type="text"
-      matInput
-      [(ngModel)]="animal.Nome"
-      required
-      minlength="3"
-      #saveControl="ngModel"
-      >
-    </mat-form-field>
-  </p>
-  <p>    
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Data de Nascimento:</mat-label>
-      <input
-      type="date"
-      matInput
-      [(ngModel)]="animal.DataNasc"
-      required
-      #saveControl="ngModel">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Raca:</mat-label>
-      <input
-      type="text"
-      matInput
-      [(ngModel)]="animal.Raca"
-      required
-      #saveControl="ngModel">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Tamanho:</mat-label>
-      <input
-      type="text"
-      matInput
-      [(ngModel)]="animal.Tamanho"
-      required
-      #saveControl="ngModel">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Especie:</mat-label>
-      <input
-      type="text"
-      matInput
-      [(ngModel)]="animal.Especie"
-      required
-      #saveControl="ngModel">
-    </mat-form-field>
-  </p>
-  <p>    
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Tutor:</mat-label>
-      <input
-      type="text"
-      matInput
-      [(ngModel)]="animal.Tutor"
-      required
-      #saveControl="ngModel"
-      minlength="11"
+</p>
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Data de Nascimento:</mat-label>
+    <input type="date" matInput [(ngModel)]="animal.DataNasc" required #saveControl="ngModel">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Raca:</mat-label>
+    <input type="text" matInput [(ngModel)]="animal.Raca" required #saveControl="ngModel">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Tamanho:</mat-label>
+    <input type="text" matInput [(ngModel)]="animal.Tamanho" required #saveControl="ngModel">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Especie:</mat-label>
+    <input type="text" matInput [(ngModel)]="animal.Especie" required #saveControl="ngModel">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Tutor:</mat-label>
+    <input type="text" matInput [(ngModel)]="animal.Tutor" required #saveControl="ngModel" minlength="11"
       maxlength="11">
-    </mat-form-field>
-  </p>
-  <p>    
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Observações:</mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="animal.Observacoes"
-        >
-    </mat-form-field>
-  </p>
-  <button class="rbButton" mat-fab [disabled]="saveControl.invalid" (click)="salvaAnimal()"><mat-icon>add</mat-icon></button>
-  
-    
-  
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Observações:</mat-label>
+    <input type="text" matInput [(ngModel)]="animal.Observacoes">
+  </mat-form-field>
+</p>
+<button class="rbButton" mat-fab [disabled]="saveControl.invalid" (click)="salvaAnimal()">
+  <mat-icon>add</mat-icon>
+</button>

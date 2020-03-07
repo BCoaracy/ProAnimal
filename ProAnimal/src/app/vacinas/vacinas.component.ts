@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Vacinas } from '../models/vacinas.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-vacinas',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vacinas.component.css']
 })
 export class VacinasComponent implements OnInit {
+
+  Vacinas$: Observable<Vacinas[]>;
 
   constructor() { }
 

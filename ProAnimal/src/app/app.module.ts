@@ -49,7 +49,7 @@ import { VeterinariosComponent } from './veterinarios/veterinarios.component';
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AnimaisService],
   bootstrap: [AppComponent]
