@@ -1,6 +1,10 @@
-<mat-toolbar color="primary">
-  <span>Cadastro de Vacinas</span>
-</mat-toolbar>
-<mat-form-field appearance="outline" color="primary">
-  <input type="text" matInput [(ngModel)]="vacina.Nome" (keyup.enter)="salvarVacina()" #saveControl="ngModel">
-</mat-form-field>
+
+  <form [formGroup]="vaxForm">
+    <mat-form-field>
+      <input MatInput ngSubmit(onSubmit()) placeholder="Vacina" formControlName="nome" #name>
+    </mat-form-field>
+    <mat-form-field>
+      <input MatInput placeholder="Lote" formControlName="lote" #lote>
+    </mat-form-field>
+  </form> 
+

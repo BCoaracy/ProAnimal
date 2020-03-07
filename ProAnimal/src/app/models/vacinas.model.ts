@@ -1,4 +1,4 @@
-export interface Vacinas {
+export interface iVacinas {
   IdVacinas: number;
   Nome: string;
   NumeroLote: number;

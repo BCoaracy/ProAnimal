@@ -3,15 +3,17 @@ import { NgModule } from '@angular/core';
 // Import Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // Import Angular Material
 import { MatToolbarModule, MatDividerModule, MatButtonModule } from '@angular/material';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { VacinasComponent } from './vacinas/vacinas.component';
 import { DoencasComponent } from './doencas/doencas.component';
 import { TutoresComponent } from './tutores/tutores.component';
 import { VeterinariosComponent } from './veterinarios/veterinarios.component';
+import { from } from 'rxjs';
 
 
 
@@ -41,15 +44,18 @@ import { VeterinariosComponent } from './veterinarios/veterinarios.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
     MatSliderModule,
+    MatSnackBarModule,
+    MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [AnimaisService],
   bootstrap: [AppComponent]
