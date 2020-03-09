@@ -8,16 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class VacinasService {
 
-  private vacinasCollection: AngularFirestoreCollection<iVacinas> 
+  private vacinasCollection: AngularFirestoreCollection<iVacinas>
     = this.afs.collection('vacinas');
 
   constructor(private afs: AngularFirestore) { }
 
-  getVacinas(): Observable<iVacinas[]>{
+  getVacinas(): Observable<iVacinas[]> {
     return this.vacinasCollection.valueChanges();
   }
 
   addVacinas(v: iVacinas) {
+    v.dataProc = null;
+    v.dataRetorno = null;
+
     return this.vacinasCollection.add(v);
   }
 

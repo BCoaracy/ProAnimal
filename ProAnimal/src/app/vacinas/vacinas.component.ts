@@ -12,12 +12,14 @@ import { VacinasService } from '../shared/vacinas.service';
 })
 export class VacinasComponent implements OnInit {
 
+  vacinas$: Observable<iVacinas[]>;
+
   vaxForm = this.fb.group({
     idVacina: [undefined],
-    nome: ['', [Validators.required]],
-    lote: ['', [Validators.required]]
+    Nome: ['', [Validators.required]],
+    Finalidade: ['', [Validators.required]]
   })
-  
+
 
   constructor(
     private fb: FormBuilder,
@@ -28,23 +30,23 @@ export class VacinasComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(){
+  onSubmit() {
     let v: iVacinas = this.vaxForm.value;
-    if (!v.IdVacinas){
+    if (!v.IdVacinas) {
       this.addVacina(v);
-    }else{
+    } else {
       this.updateVacina(v);
     }
   }
 
   addVacina(v: iVacinas) {
     this.vacinaService.addVacinas(v)
-    .then(()=>{
-      this.snackBar.open('Vacina Adicionada.', 'OK', {duration: 2500})
-    })
-    .catch(()=>{
-      this.snackBar.open('Erro ao submeter a vacina') 
-    })
+      .then(() => {
+        this.snackBar.open('Vacina Adicionada.', 'OK', { duration: 2500 })
+      })
+      .catch(() => {
+        this.snackBar.open('Erro ao submeter a vacina')
+      })
   }
 
   updateVacina(v: iVacinas) {
