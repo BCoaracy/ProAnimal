@@ -31,6 +31,7 @@ export class VacinasComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('Entrou no submit');
     let v: iVacinas = this.vaxForm.value;
     if (!v.IdVacinas) {
       this.addVacina(v);

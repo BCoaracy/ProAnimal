@@ -18,6 +18,7 @@ export class VacinasService {
   }
 
   addVacinas(v: iVacinas) {
+    v.IdVacinas = this.afs.createId();
     v.dataProc = null;
     v.dataRetorno = null;
 
