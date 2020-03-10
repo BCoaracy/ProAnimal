@@ -26,6 +26,7 @@ import { DoencasComponent } from './doencas/doencas.component';
 import { TutoresComponent } from './tutores/tutores.component';
 import { VeterinariosComponent } from './veterinarios/veterinarios.component';
 import { from } from 'rxjs';
+import { MaterialModule } from './material.module';
 
 
 
@@ -56,7 +57,8 @@ import { from } from 'rxjs';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MaterialModule
   ],
   providers: [AnimaisService],
   bootstrap: [AppComponent]

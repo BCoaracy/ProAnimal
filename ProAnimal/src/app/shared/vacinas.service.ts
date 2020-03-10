@@ -14,15 +14,15 @@ export class VacinasService {
   constructor(private afs: AngularFirestore) { }
 
   getVacinas(): Observable<iVacinas[]> {
+    console.log('get Vacinas vacinaService')
     return this.vacinasCollection.valueChanges();
   }
 
   addVacinas(v: iVacinas) {
-    v.IdVacinas = this.afs.createId();
-    v.dataProc = null;
-    v.dataRetorno = null;
-
-    return this.vacinasCollection.add(v);
+    
+    v.Id = this.afs.createId();
+    return this.vacinasCollection.doc(v.Id).set(v);
+    // return this.vacinasCollection.add(v);
   }
 
 }

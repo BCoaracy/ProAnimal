@@ -1,8 +1,5 @@
 export interface iVacinas {
-  IdVacinas: number;
+  Id: string;
   Nome: string;
   Finalidade: string;
-  NumeroLote: number;
-  dataProc: Date;
-  dataRetorno: Date;
 }

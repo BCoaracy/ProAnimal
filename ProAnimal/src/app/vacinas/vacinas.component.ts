@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { iVacinas } from '../models/vacinas.model';
-import { Observable } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Observable, from } from 'rxjs';
+import { FormBuilder, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { VacinasService } from '../shared/vacinas.service';
+
 
 @Component({
   selector: 'app-vacinas',
@@ -13,9 +14,12 @@ import { VacinasService } from '../shared/vacinas.service';
 export class VacinasComponent implements OnInit {
 
   vacinas$: Observable<iVacinas[]>;
+  displayedColumns = ['Nome', 'Finalidade'];
+
+  @ViewChild('nome', {static:false}) vaxNome: ElementRef;
 
   vaxForm = this.fb.group({
-    idVacina: [undefined],
+    Id: [undefined],
     Nome: ['', [Validators.required]],
     Finalidade: ['', [Validators.required]]
   })
@@ -28,12 +32,14 @@ export class VacinasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.vacinas$ = this.vacinaService.getVacinas();
+    
   }
 
   onSubmit() {
     console.log('Entrou no submit');
     let v: iVacinas = this.vaxForm.value;
-    if (!v.IdVacinas) {
+    if (!v.Id) {
       this.addVacina(v);
     } else {
       this.updateVacina(v);
@@ -44,6 +50,8 @@ export class VacinasComponent implements OnInit {
     this.vacinaService.addVacinas(v)
       .then(() => {
         this.snackBar.open('Vacina Adicionada.', 'OK', { duration: 2500 })
+        this.vaxForm.reset({Nome:'', Finalidade:'', Id: undefined});
+        this.vaxNome.nativeElement.focus();
       })
       .catch(() => {
         this.snackBar.open('Erro ao submeter a vacina')
