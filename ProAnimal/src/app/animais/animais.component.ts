@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../shared/animais.service';
-import { Animais } from './animais';
-import { AngularFirestoreCollection } from 'angularfire2/firestore';
-import { async } from '@angular/core/testing';
+import { MatSnackBar } from '@angular/material';
 import { iAnimais } from '../models/animais.model';
 import { Observable } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-animais',
@@ -14,54 +13,43 @@ import { Observable } from 'rxjs';
 export class AnimaisComponent implements OnInit {
 
   animal$: Observable<iAnimais[]>;
-
-  animal: Animais = {
-    IdChip: '',
-    Tutor: '',
-    DataNasc: null,
-    Especie: '',
-    Nome: '',
-    Observacoes: '',
-    Raca: '',
-    Tamanho: '',
-    Ocorrencias: null,
-  };
-
-  a: AngularFirestoreCollection<Animais>;
+  //filterTutores$:Observable<iTutores[]>; // A fazer
+  animalForm = this.fb.group({
+    IdChip: [undefined],
+    //IdChip: ['', [Validators.required]], 
+    Tutor:['', [Validators.required]],
+    DataNasc:['', [Validators.required]],
+    Especie:['', [Validators.required]],
+    Nome:['', [Validators.required]],
+    Observacoes:['', [Validators.required]],
+    Raca:['', [Validators.required]],
+    Tamanho:['', [Validators.required]],
+    Ocorrencias:['', [Validators.required]]
+  })
+ 
 
   constructor(
-    private _animaisService: AnimaisService
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private animaisService: AnimaisService,
   ) { }
 
-  ngOnInit() { this.showAnimalConsole(); }
+  ngOnInit() {  }
 
-  public getAnimalControle(idChip: string) {
-    this.animal$ = this._animaisService.getAnimal(idChip)[0];
-    console.log(this.animal$);
+  public searchAnimal() {
+    let a: iAnimais = this.animalForm.value;
+    this.animal$ = this.animaisService.getAnimal(a.IdChip);
   }
 
-  public updateAnimal(property: string, value: any) {
-    console.log('updata o bicho');
-    this._animaisService.updateAnimal(this.animal);
-  }
+  // public updateAnimal(property: string, value: any) {
+  //   console.log('updata o bicho');
+  //   this.animaisService.updateAnimal(this.animal);
+  // }
 
-  public salvaAnimal() {
-    this._animaisService.createAnimal(this.animal);
-  }
+  // public salvaAnimal() {
+  //   this.animaisService.createAnimal(this.animal);
+  // }
 
-  public showAnimalConsole() {
-    console.log(this.animal);
-    console.log('pega o bicho\n' + this.animal.Nome + '\n'
-      + this.animal.IdChip + '\n'
-      + this.animal.Tutor + '\n'
-      + this.animal.DataNasc + '\n'
-      + this.animal.Especie + '\n'
-      + this.animal.Nome + '\n'
-      + this.animal.Observacoes + '\n'
-      + this.animal.Raca + '\n'
-      + this.animal.Tamanho + '\n'
-      + this.animal.Ocorrencias + '\n'
-    );
-  }
+  
 
 }

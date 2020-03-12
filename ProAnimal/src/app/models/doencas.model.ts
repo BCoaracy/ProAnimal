@@ -1,8 +1,6 @@
-export interface Doenca {
-  IdDoenca: number;
+export interface iDoencas {
+  IdDoenca: string;
   Nome: string;
   zoonose: boolean;
-  NumeroLote: number;
-  dataProc: Date;
-  dataRetorno: Date;
+  Sintomas: string;
 }

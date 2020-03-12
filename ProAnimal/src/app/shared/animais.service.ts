@@ -29,7 +29,6 @@ export class AnimaisService {
     return this.afs.collection<iAnimais>('animais',
       ref => ref.where('IdChip', '==', chipAnimal))
       .valueChanges();
-
   }
 
   createAnimal(a: Animais): Promise<void> {

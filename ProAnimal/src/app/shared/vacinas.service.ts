@@ -25,4 +25,19 @@ export class VacinasService {
     // return this.vacinasCollection.add(v);
   }
 
+  updateVacina(v: iVacinas){
+    return this.vacinasCollection.doc(v.Id).set(v);
+  }
+
+  deleteVacina(v: iVacinas){
+    return this.vacinasCollection.doc(v.Id).delete();
+  }
+
+  searchByName(nome:string): Observable<iVacinas[]>{
+    return this.afs.collection<iVacinas>('vacinas', 
+      ref => ref.orderBy('Nome').startAt(nome).endAt(nome+"\uf8ff"))
+      .valueChanges();
+  }
+
+
 }

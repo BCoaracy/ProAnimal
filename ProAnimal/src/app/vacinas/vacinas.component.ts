@@ -14,7 +14,8 @@ import { VacinasService } from '../shared/vacinas.service';
 export class VacinasComponent implements OnInit {
 
   vacinas$: Observable<iVacinas[]>;
-  displayedColumns = ['Nome', 'Finalidade'];
+  filterVax$: Observable<iVacinas[]>;
+  displayedColumns = ['Nome', 'Finalidade', 'Funcoes'];
 
   @ViewChild('nome', {static:false}) vaxNome: ElementRef;
 
@@ -37,7 +38,6 @@ export class VacinasComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Entrou no submit');
     let v: iVacinas = this.vaxForm.value;
     if (!v.Id) {
       this.addVacina(v);
@@ -58,8 +58,38 @@ export class VacinasComponent implements OnInit {
       })
   }
 
-  updateVacina(v: iVacinas) {
+  updateVacina(v:iVacinas){
+    this.vacinaService.updateVacina(v)
+    .then(()=>{
+      this.snackBar.open('Vacina Editada', 'OK', {duration: 2000})
+      this.vaxForm.reset({Nome:'', Finalidade:'', Id: undefined});
+      this.vaxNome.nativeElement.focus();
+    })
+    .catch((e)=> {
+      console.log(e);
+      this.snackBar.open('Ocorreu um erro ao remover o item', 'OK', {duration: 2000})
+    });
+  }
 
+  edit(v: iVacinas) {
+    this.vaxForm.setValue(v);
+    // this.vacinaService.updateVacina(v);
+  }
+
+  del(v: iVacinas){
+    this.vacinaService.deleteVacina(v)
+      .then(()=>{
+        this.snackBar.open('A Vacina foi removida', 'OK', {duration: 2000})
+      })
+      .catch((e)=> {
+        console.log(e);
+        this.snackBar.open('Ocorreu um erro ao remover o item', 'OK', {duration: 2000})
+      });
+
+  }
+
+  filter(event){
+    this.filterVax$ = this.vacinaService.searchByName(event.target.value);
   }
 
 }

@@ -27,6 +27,7 @@ import { TutoresComponent } from './tutores/tutores.component';
 import { VeterinariosComponent } from './veterinarios/veterinarios.component';
 import { from } from 'rxjs';
 import { MaterialModule } from './material.module';
+import { HistoricoComponent } from './historico/historico.component';
 
 
 
@@ -38,7 +39,8 @@ import { MaterialModule } from './material.module';
     VacinasComponent,
     DoencasComponent,
     TutoresComponent,
-    VeterinariosComponent
+    VeterinariosComponent,
+    HistoricoComponent
   ],
   imports: [
     BrowserModule,
