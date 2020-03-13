@@ -6,7 +6,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // Import Angular Material
-import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule } from '@angular/material';
+import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule } from '@angular/material';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -60,7 +60,8 @@ import { HistoricoComponent } from './historico/historico.component';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MaterialModule
+    MaterialModule,
+    MatCheckboxModule
   ],
   providers: [AnimaisService],
   bootstrap: [AppComponent]
