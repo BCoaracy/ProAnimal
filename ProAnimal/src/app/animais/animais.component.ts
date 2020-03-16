@@ -16,17 +16,16 @@ export class AnimaisComponent implements OnInit {
   //filterTutores$:Observable<iTutores[]>; // A fazer
   animalForm = this.fb.group({
     IdChip: [undefined],
-    //IdChip: ['', [Validators.required]], 
-    Tutor:['', [Validators.required]],
-    DataNasc:['', [Validators.required]],
-    Especie:['', [Validators.required]],
-    Nome:['', [Validators.required]],
-    Observacoes:['', [Validators.required]],
-    Raca:['', [Validators.required]],
-    Tamanho:['', [Validators.required]],
-    Ocorrencias:['', [Validators.required]]
+    Tutor: ['', [Validators.required]],
+    DataNasc: ['', [Validators.required]],
+    Especie: ['', [Validators.required]],
+    Nome: ['', [Validators.required]],
+    Observacoes: ['', [Validators.required]],
+    Raca: ['', [Validators.required]],
+    Tamanho: ['', [Validators.required]],
+    Ocorrencias: ['', [Validators.required]]
   })
- 
+
 
   constructor(
     private fb: FormBuilder,
@@ -34,22 +33,34 @@ export class AnimaisComponent implements OnInit {
     private animaisService: AnimaisService,
   ) { }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
   public searchAnimal() {
     let a: iAnimais = this.animalForm.value;
     this.animal$ = this.animaisService.getAnimal(a.IdChip);
   }
 
-  // public updateAnimal(property: string, value: any) {
-  //   console.log('updata o bicho');
-  //   this.animaisService.updateAnimal(this.animal);
-  // }
+  // reset form
 
-  // public salvaAnimal() {
-  //   this.animaisService.createAnimal(this.animal);
-  // }
+  onSubmit() {
+    let a: iAnimais = this.animalForm.value;
+    if (!a.IdChip) {
+      this.addAnimal(a);
+    } else {
+      // this.updateAnimal(a);
+    }
+  }
 
-  
+  addAnimal(a: iAnimais) {
+    this.animaisService.createAnimal(a)
+      .then(() => {
+        this.snackBar.open('Adição Completa.', 'OK', { duration: 2000 })
+      })
+      .catch((error) => {
+        this.snackBar.open('Erro ao salvar.' + error, 'OK', { duration: 2000 })
+      })
+  }
+
+
 
 }

@@ -1,6 +1,6 @@
 export interface iDoencas {
-  IdDoenca: string;
+  Id: string;
   Nome: string;
-  zoonose: boolean;
+  Zoonose: boolean;
   Sintomas: string;
 }

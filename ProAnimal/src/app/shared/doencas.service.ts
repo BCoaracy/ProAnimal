@@ -9,30 +9,30 @@ import { Observable } from 'rxjs';
 export class DoencasService {
 
   private doencasCollection: AngularFirestoreCollection<iDoencas>
-    =this.afs.collection('doencas')
+    = this.afs.collection('doencas')
 
-  constructor( private afs: AngularFirestore ) { }
+  constructor(private afs: AngularFirestore) { }
 
   getDoencas(): Observable<iDoencas[]> {
     return this.doencasCollection.valueChanges();
   }
 
   addDoenca(d: iDoencas) {
-    d.IdDoenca = this.afs.createId();
-    return this.doencasCollection.doc(d.IdDoenca).set(d);
+    d.Id = this.afs.createId();
+    return this.doencasCollection.doc(d.Id).set(d);
   }
 
   updateDoencas(d: iDoencas) {
-    return this.doencasCollection.doc(d.IdDoenca).set(d);
+    return this.doencasCollection.doc(d.Id).set(d);
   }
 
   deleteDoencas(d: iDoencas) {
-    return this.doencasCollection.doc(d.IdDoenca).delete();
+    return this.doencasCollection.doc(d.Id).delete();
   }
 
-  searchByName(nome:string): Observable<iDoencas[]>{
+  searchByName(nome: string): Observable<iDoencas[]> {
     return this.afs.collection<iDoencas>('doencas',
-      ref => ref.orderBy('Nome').startAt(nome).endAt(nome+'\uf8ff'))
+      ref => ref.orderBy('Nome').startAt(nome).endAt(nome + '\uf8ff'))
       .valueChanges();
   }
 

@@ -5,8 +5,7 @@
   <mat-form-field>
     <input matInput placeholder="Finalidade" formControlName="Finalidade" #finalidade>
   </mat-form-field>
-   <button mat-icon-button type="submit" [disabled]="!vaxForm.valid" (click)="onSubmit()"
-      color="accent"> 
+  <button mat-icon-button type="submit" [disabled]="!vaxForm.valid" (click)="onSubmit()" color="accent">
     <mat-icon>add</mat-icon>
   </button>
 </form>
@@ -23,24 +22,25 @@
   <ng-container matColumnDef="Funcoes">
     <th mat-header-cell *matHeaderCellDef> Funções </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
-      <button mat-button color="accent" (click)="del(element)"><mat-icon>delete</mat-icon></button>
+      <button mat-button color="primary" (click)="edit(element)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button color="accent" (click)="del(element)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </td>
   </ng-container>
-  
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 
-    <div fxLayout="column" fxLayoutAlign="space-around strech" style="padding: 20px;">
-      <mat-form-field>
-        <input matInput autocomplete="off" placeholder="Buscar Vacinas" (keyup)="filter($event)">
-      </mat-form-field>
-    </div>
-    <ul *ngFor="let item of filterVax$ | async">
-      <li>{{item.Nome}}</li>
-    </ul>
-
-
-
+<div fxLayout="column" fxLayoutAlign="space-around strech" style="padding: 20px;">
+  <mat-form-field>
+    <input matInput autocomplete="off" placeholder="Buscar Vacinas" (keyup)="filter($event)">
+  </mat-form-field>
+</div>
+<ul *ngFor="let item of filterVax$ | async">
+  <li>{{item.Nome}}</li>
+</ul>
