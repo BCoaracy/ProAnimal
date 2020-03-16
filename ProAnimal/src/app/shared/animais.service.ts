@@ -17,13 +17,15 @@ export class AnimaisService {
   }
 
 
-  getAnimal(chipAnimal: string): Observable<iAnimais[]> {
+  getAnimal(IdChip: String): Observable<iAnimais[]> {
     return this.afs.collection<iAnimais>('animais',
-      ref => ref.where('IdChip', '==', chipAnimal))
+      ref => ref.limit(1).where('IdChip', '==', IdChip))
       .valueChanges();
   }
 
   createAnimal(a: iAnimais) {
+    
+    if(a==this.getAnimal(a.IdChip)[0]){console.log('registro igual')} //Não funciona dessa forma
     return this.animCollection.doc(a.IdChip).set(a);
   }
 

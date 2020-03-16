@@ -23,7 +23,7 @@ export class AnimaisComponent implements OnInit {
     Observacoes: ['', [Validators.required]],
     Raca: ['', [Validators.required]],
     Tamanho: ['', [Validators.required]],
-    Ocorrencias: ['', [Validators.required]]
+    Ocorrencias: ['']
   })
 
 
@@ -33,18 +33,23 @@ export class AnimaisComponent implements OnInit {
     private animaisService: AnimaisService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    console.log(this.animaisService.getAnimal('32'))
+  }
 
-  public searchAnimal() {
-    let a: iAnimais = this.animalForm.value;
-    this.animal$ = this.animaisService.getAnimal(a.IdChip);
+  searchAnimal(IdChip: string) {
+    console.log('Chip lido pelo search: ' + IdChip)
+    let a = this.animaisService.getAnimal(IdChip);
+    this.animalForm.setValue(a);
   }
 
   // reset form
 
   onSubmit() {
+    console.log('entrou onsubmit')
     let a: iAnimais = this.animalForm.value;
-    if (!a.IdChip) {
+    console.log(a);
+    if (a.IdChip) {
       this.addAnimal(a);
     } else {
       // this.updateAnimal(a);
