@@ -70,6 +70,7 @@ export class DoencasComponent implements OnInit {
   }
 
   edit(v: iDoencas) {
+    console.log(v);
     this.doenForm.setValue(v);
   }
 

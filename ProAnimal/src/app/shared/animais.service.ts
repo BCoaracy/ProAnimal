@@ -24,8 +24,8 @@ export class AnimaisService {
   }
 
   createAnimal(a: iAnimais) {
-    
-    if(a==this.getAnimal(a.IdChip)[0]){console.log('registro igual')} //Não funciona dessa forma
+
+    if (a == this.getAnimal(a.IdChip)[0]) { console.log('registro igual') } //Não funciona dessa forma
     return this.animCollection.doc(a.IdChip).set(a);
   }
 

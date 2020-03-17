@@ -1,0 +1,21 @@
+<div>
+  <mat-tab-group>
+    <mat-tab label="Consulta">
+      <div>
+        <form [formGroup]="animalForm">
+          <mat-form-field>
+            <input matInput placeholder="Microchip" formControlName="IdChip" #idchip>
+          </mat-form-field>
+
+          <button mat-icon-button (click)="searchAnimal()" color="accent">
+            <mat-icon>search</mat-icon>
+          </button>
+        </form>
+      </div>
+    </mat-tab>
+
+
+
+    <mat-tab label="Cadastro"></mat-tab>
+  </mat-tab-group>
+</div>

@@ -15,7 +15,7 @@ export class AnimaisComponent implements OnInit {
   animal$: Observable<iAnimais[]>;
   //filterTutores$:Observable<iTutores[]>; // A fazer
   animalForm = this.fb.group({
-    IdChip: [undefined],
+    IdChip: [''],
     Tutor: ['', [Validators.required]],
     DataNasc: ['', [Validators.required]],
     Especie: ['', [Validators.required]],
@@ -33,14 +33,18 @@ export class AnimaisComponent implements OnInit {
     private animaisService: AnimaisService,
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     console.log(this.animaisService.getAnimal('32'))
   }
 
-  searchAnimal(IdChip: string) {
-    console.log('Chip lido pelo search: ' + IdChip)
-    let a = this.animaisService.getAnimal(IdChip);
-    this.animalForm.setValue(a);
+  searchAnimal() {
+
+    // this.animaisService.getAnimal(this.animalForm.value.IdChip);
+    // console.log('Atribuindo valor ao form');
+    // console.log();
+    this.animalForm.setValue(this.animaisService
+      .getAnimal(this.animalForm.value.IdChip));
+
   }
 
   // reset form
