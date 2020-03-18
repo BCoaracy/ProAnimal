@@ -1,7 +1,4 @@
-export interface Tutores {
+export interface iTutores {
   cpf: string;
   Nome: string;
-  DataNasc: Date;
-  Bloqueado: boolean;
-  Impedido: boolean;
 }
