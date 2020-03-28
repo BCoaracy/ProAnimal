@@ -13,12 +13,12 @@ import { PersonaService } from '../shared/persona.service'
 export class TutoresComponent implements OnInit {
 
   tutores$: Observable<iTutores[]>;
-  
+
   tutorForm = this.fb.group({
     Cpf: ['', [Validators.required]],
     Nome: ['', [Validators.required]]
   })
-  
+
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -28,21 +28,21 @@ export class TutoresComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(){
-    let t:iTutores = this.tutorForm.value;
+  onSubmit() {
+    let t: iTutores = this.tutorForm.value;
     console.log(t);
     this.addTutor(t);
   }
 
   addTutor(t: iTutores) {
-    console.log('No addTutor: '+t);
+    console.log('No addTutor: ' + t);
     this.pService.addTutor(t)
       .then(() => {
-        this.snackBar.open('Vacina Adicionada.', 'OK', { duration: 2500 })
-        this.tutorForm.reset({Nome:'', CPF:''});
+        this.snackBar.open('Tutor Adicionado.', 'OK', { duration: 2500 })
+        this.tutorForm.reset({ Nome: '', CPF: '' });
       })
       .catch(() => {
-        this.snackBar.open('Erro ao submeter a vacina')
+        this.snackBar.open('Erro ao submeter o Tutor')
       })
   }
 }

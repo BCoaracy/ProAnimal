@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { iAnimais } from '../models/animais.model';
 import { Observable } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
+import { iTutores } from '../models/tutores.model';
 
 @Component({
   selector: 'app-animais',
@@ -12,10 +13,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AnimaisComponent implements OnInit {
 
+  // listaTutores$: Observable<iTutores[]>;
   animal$: Observable<iAnimais[]>;
-  //filterTutores$:Observable<iTutores[]>; // A fazer
+  displayedColumns = ['Nome', 'Tutor', 'Ocorrencias', 'Especie', 'Raca', 'Tamanho']
+
   animalForm = this.fb.group({
-    IdChip: [''],
+    IdChip: ['', [Validators.required]],
     Tutor: ['', [Validators.required]],
     DataNasc: ['', [Validators.required]],
     Especie: ['', [Validators.required]],
@@ -26,6 +29,11 @@ export class AnimaisComponent implements OnInit {
     Ocorrencias: ['']
   })
 
+  tamanhos = [
+    { value: 'Pequeno' },
+    { value: 'Medio' },
+    { value: 'Grande' }
+  ]
 
   constructor(
     private fb: FormBuilder,
@@ -34,20 +42,18 @@ export class AnimaisComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.animaisService.getAnimal('32'))
+    // this.listaTutores$ = null;
   }
 
   searchAnimal() {
-
-    // this.animaisService.getAnimal(this.animalForm.value.IdChip);
-    // console.log('Atribuindo valor ao form');
-    // console.log();
-    this.animalForm.setValue(this.animaisService
-      .getAnimal(this.animalForm.value.IdChip));
+    let a =
+      this.animaisService.getAnimal(this.animalForm.value.IdChip);
+    console.log(a);
+    this.animalForm.reset({ IdChip: '' });
+    console.log('Setando formulario')
+    this.animalForm.setValue(a);
 
   }
-
-  // reset form
 
   onSubmit() {
     console.log('entrou onsubmit')
@@ -70,6 +76,20 @@ export class AnimaisComponent implements OnInit {
       })
   }
 
+  private tutor: Observable<iTutores>;
 
+  checkCpfTutorExist(cpf: string) {
+    this.tutor = this.animaisService.searchByCpf(cpf).map(res => res.data as iTutores);
+
+
+  }
+
+  // filterCpf(event) {
+  //   this.listaTutores$ = this.animaisService.searchByCpf(event.target.value);
+  // }
+
+  // displayFn(subject) {
+  //   return subject ? subject.cpf : undefined;
+  // }
 
 }

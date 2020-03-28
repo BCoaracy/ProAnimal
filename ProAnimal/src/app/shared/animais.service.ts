@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { iAnimais } from '../models/animais.model';
 import 'firebase/firestore';
+import { iTutores } from '../models/tutores.model';
 
 @Injectable()
 
@@ -19,8 +20,9 @@ export class AnimaisService {
 
   getAnimal(IdChip: String): Observable<iAnimais[]> {
     return this.afs.collection<iAnimais>('animais',
-      ref => ref.limit(1).where('IdChip', '==', IdChip))
+      ref => ref.where('IdChip', '==', IdChip))
       .valueChanges();
+
   }
 
   createAnimal(a: iAnimais) {
@@ -37,6 +39,8 @@ export class AnimaisService {
     return this.animCollection.doc(a.IdChip)
       .delete();
   }
+
+
 
 
 }

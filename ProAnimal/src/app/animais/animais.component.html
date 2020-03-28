@@ -2,19 +2,108 @@
   <mat-tab-group>
     <mat-tab label="Consulta">
       <div>
-        <form [formGroup]="animalForm">
+        <form fxLayout="row">
           <mat-form-field>
-            <input matInput placeholder="Microchip" formControlName="IdChip" #idchip>
+            <input matInput placeholder="Microchip" #idchip>
           </mat-form-field>
-
           <button mat-icon-button (click)="searchAnimal()" color="accent">
             <mat-icon>search</mat-icon>
           </button>
+          <br>
         </form>
+        <!-- <div>
+          <table mat-table [dataSource]="animal$ | async">
+            <ng-container matColumnDef="Nome">
+              <th mat-header-cell *matHeaderCellDef> Nome: </th>
+              <td mat-cell *matCellDef="let row"> {{row.Nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Tutor">
+              <th mat-header-cell *matHeaderCellDef> Tutor: </th>
+              <td mat-cell *matCellDef="let row"> {{row.Tutor}} </td>
+            </ng-container>
+            <ng-container matColumnDef="DataNasc">
+              <th mat-header-cell *matHeaderCellDef> DataNasc: </th>
+              <td mat-cell *matCellDef="let row"> {{row.DataNasc}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Especie">
+              <th mat-header-cell *matHeaderCellDef> Especie: </th>
+              <td mat-cell *matCellDef="let row"> {{row.Especie}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Raca">
+              <th mat-header-cell *matHeaderCellDef> Raça: </th>
+              <td mat-cell *matCellDef="let row"> {{row.Raca}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Tamanho">
+              <th mat-header-cell *matHeaderCellDef> Tamanho: </th>
+              <td mat-cell *matCellDef="let row"> {{row.Tamanho}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;;"></tr>
+          </table>
+
+        </div> -->
+
+
       </div>
     </mat-tab>
 
 
-    <mat-tab label="Cadastro"></mat-tab>
+    <mat-tab label="Cadastro">
+      <div>
+        <form [formGroup]="animalForm" fxLayout="row">
+          <mat-form-field>
+            <input matInput placeholder="Microchip" formControlName="IdChip" #IdChip>
+          </mat-form-field>
+          <br>
+
+          <!-- <mat-form-field>  Estudar autocomplete
+            <input type="text" matInput placeholder="CPF do tutor" formControlName="Tutor" [matAutocomplete]="auto"
+              (keyup)="filterCpf($event)">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let tutor of listaTutores$ | async" [value]="tutor">
+                {{tutor.Cpf}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
+
+          <mat-form-field>
+            <input matInput type="text" placeholder="CPF do tutor" formControlName="Tutor">
+          </mat-form-field>
+
+
+          <br>
+          <mat-form-field>
+            <input matInput type="date" placeholder="DataNasc" formControlName="DataNasc">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Especie" formControlName="Especie">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Nome" formControlName="Nome">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Observações" formControlName="Observacoes">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Raça" formControlName="Raca">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-select formControlName="Tamanho" placeholder="Tamanho">
+              <mat-option *ngFor="let tamanho of tamanhos" [value]="tamanho.value">
+                {{tamanho.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <button mat-icon-button (click)="onSubmit()" color="accent">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>
