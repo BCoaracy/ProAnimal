@@ -3,7 +3,7 @@ import { iTutores } from '../models/tutores.model';
 import { Observable } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { PersonaService } from '../shared/persona.service'
+import { PersonaService } from '../services/persona.service'
 
 @Component({
   selector: 'app-tutores',

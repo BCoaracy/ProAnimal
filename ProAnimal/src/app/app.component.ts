@@ -12,10 +12,6 @@ import { Animais } from './animais/animais';
 export class AppComponent implements OnInit {
   title = 'Pro-Animal';
 
-
-  //animal = new Animais();
-
-
   constructor(
     private db: AngularFirestore
   ) { }

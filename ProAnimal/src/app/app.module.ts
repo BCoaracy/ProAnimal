@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimaisComponent } from './animais/animais.component';
-import { AnimaisService } from './shared/animais.service';
+import { AnimaisService } from './services/animais.service';
 import { VacinasComponent } from './vacinas/vacinas.component';
 import { DoencasComponent } from './doencas/doencas.component';
 import { TutoresComponent } from './tutores/tutores.component';
@@ -28,6 +28,7 @@ import { VeterinariosComponent } from './veterinarios/veterinarios.component';
 import { from } from 'rxjs';
 import { MaterialModule } from './material.module';
 import { HistoricoComponent } from './historico/historico.component';
+import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 
 
 
@@ -40,7 +41,8 @@ import { HistoricoComponent } from './historico/historico.component';
     DoencasComponent,
     TutoresComponent,
     VeterinariosComponent,
-    HistoricoComponent
+    HistoricoComponent,
+    AgendamentosComponent
   ],
   imports: [
     BrowserModule,

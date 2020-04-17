@@ -17,8 +17,8 @@ export class PersonaService {
     return this.tutoresCollection.add(t);
   }
 
-  searchTutorByCpf(cpf: string): Observable<iTutores> {
-    this.tutoresCollection
-  }
+  // searchTutorByCpf(cpf: string): Observable<iTutores> {
+  //   this.tutoresCollection
+  // }
 
 }

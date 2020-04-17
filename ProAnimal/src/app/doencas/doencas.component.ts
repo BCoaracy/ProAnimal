@@ -3,7 +3,7 @@ import { iDoencas } from '../models/doencas.model';
 import { Observable, from } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { DoencasService } from '../shared/doencas.service';
+import { DoencasService } from '../services/doencas.service';
 
 
 @Component({
