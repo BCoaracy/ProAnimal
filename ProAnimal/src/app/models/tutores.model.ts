@@ -1,4 +1,7 @@
 export interface iTutores {
-  cpf: string;
+  Id: string;
+  Cpf: string;
   Nome: string;
+  Bloqueado: Boolean;
+  DataBloqueio: string;
 }

@@ -133,8 +133,8 @@ export class AnimaisComponent implements OnInit {
     this.listaTutores$ = this.animaisService.searchByCpf(event.target.value);
   }
 
-  // displayFn(subject) {
-  //   return subject ? subject.cpf : undefined;
-  // }
+  abrirAgendamento() {
+
+  }
 
 }

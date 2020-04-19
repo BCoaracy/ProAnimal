@@ -14,11 +14,19 @@ export class PersonaService {
   constructor(private afs: AngularFirestore) { }
 
   addTutor(t: iTutores) {
-    return this.tutoresCollection.add(t);
+    t.Id = this.afs.createId();
+    return this.tutoresCollection.doc(t.Id).set(t);
   }
 
-  // searchTutorByCpf(cpf: string): Observable<iTutores> {
-  //   this.tutoresCollection
-  // }
+  update(t: iTutores) {
+    return this.tutoresCollection.doc(t.Id).set(t);
+  }
+
+  searchTutorByCpf(cpf: string): Observable<iTutores[]> {
+    return this.afs.collection<iTutores>('tutores',
+      ref => ref.orderBy('Cpf').startAt(cpf).endAt(cpf + '\uf8ff'))
+      .valueChanges();
+  }
+
 
 }

@@ -1,11 +1,30 @@
 <form [formGroup]="tutorForm">
-    <mat-form-field>
-      <input matInput (ngSubmit)="onSubmit()" placeholder="CPF:" formControlName="Cpf" #cpf>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Nome Completo:" formControlName="Nome" #nome>
-    </mat-form-field>
-    <button mat-icon-button type="submit" [disabled]="!tutorForm.valid" (click)="onSubmit()" color="accent">
-      <mat-icon>add</mat-icon>
-    </button>
-  </form>
+
+
+
+  <mat-form-field hintLabel="Somente Números">
+    <input placeholder="CPF:" matInput formControlName="Cpf" [matAutocomplete]="auto" (keyup)="filter($event)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of tutores$ | async" (click)="updateForm(option.Cpf)">
+        {{option.Cpf}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+  <!-- <mat-form-field>
+    <input matInput placeholder="CPF:" formControlName="Cpf" #cpf>
+  </mat-form-field> -->
+  <mat-form-field>
+    <input matInput placeholder="Nome Completo:" formControlName="Nome" #nome>
+  </mat-form-field>
+
+  <mat-slide-toggle formControlName="Bloqueado">Bloquear</mat-slide-toggle>
+
+  <button mat-icon-button type="submit" [disabled]="!tutorForm.valid" (click)="onSubmit()" color="accent">
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+<!-- <ul *ngFor="let item of tutores$ | async">
+  <li>{{item.Nome}}</li>
+</ul> -->

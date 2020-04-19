@@ -38,13 +38,13 @@ export class DoencasComponent implements OnInit {
   onSubmit() {
     let v: iDoencas = this.doenForm.value;
     if (!v.Id) {
-      this.addVacina(v);
+      this.addDoencas(v);
     } else {
-      this.updateVacina(v);
+      this.updateDoencas(v);
     }
   }
 
-  addVacina(d: iDoencas) {
+  addDoencas(d: iDoencas) {
     this.dService.addDoenca(d)
       .then(() => {
         this.snackBar.open('Adicionado a lista.', 'OK', { duration: 2500 })
@@ -56,7 +56,7 @@ export class DoencasComponent implements OnInit {
       })
   }
 
-  updateVacina(d: iDoencas) {
+  updateDoencas(d: iDoencas) {
     this.dService.updateDoencas(d)
       .then(() => {
         this.snackBar.open('Item editado', 'OK', { duration: 2000 })
@@ -77,7 +77,7 @@ export class DoencasComponent implements OnInit {
   del(d: iDoencas) {
     this.dService.deleteDoencas(d)
       .then(() => {
-        this.snackBar.open('A Vacina foi removida', 'OK', { duration: 2000 })
+        this.snackBar.open('Removida com sucesso!', 'OK', { duration: 2000 })
       })
       .catch((e) => {
         console.log(e);

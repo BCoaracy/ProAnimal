@@ -1,1 +1,10 @@
-<p>agendamentos works!</p>
+<form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
+  <mat-form-field class="DataAgendada" formControlName="DataAgendada">
+    <mat-label>Escolha a data</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+  </mat-form-field>
+
+
+</form>

@@ -4,14 +4,16 @@ import { AnimaisComponent } from './animais/animais.component';
 import { DoencasComponent } from './doencas/doencas.component';
 import { VacinasComponent } from './vacinas/vacinas.component';
 import { TutoresComponent } from './tutores/tutores.component';
+import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 
 
 const routes: Routes = [
-  {path: 'animais', component: AnimaisComponent},
-  {path: 'vacinas', component: VacinasComponent},
-  {path: 'doencas', component: DoencasComponent},
-  {path: 'tutores', component: TutoresComponent},
-  {path: 'principal', component: Component},
+  { path: 'animais', component: AnimaisComponent },
+  { path: 'vacinas', component: VacinasComponent },
+  { path: 'doencas', component: DoencasComponent },
+  { path: 'tutores', component: TutoresComponent },
+  { path: 'agendamentos', component: AgendamentosComponent },
+  { path: 'principal', component: Component },
 ];
 
 @NgModule({

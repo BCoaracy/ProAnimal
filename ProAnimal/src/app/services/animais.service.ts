@@ -25,7 +25,7 @@ export class AnimaisService extends ServiceFireBase<iAnimais>{
 
   searchByCpf(cpf: string): Observable<iTutores[]> {
     return this.firestore.collection<iTutores>('tutores',
-      ref => ref.orderBy('Nome').startAt(cpf).endAt(cpf + "\uf8ff"))
+      ref => ref.orderBy('cpf').startAt(cpf).endAt(cpf + "\uf8ff"))
       .valueChanges();
   }
 
