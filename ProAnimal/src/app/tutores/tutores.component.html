@@ -3,7 +3,8 @@
 
 
   <mat-form-field hintLabel="Somente Números">
-    <input placeholder="CPF:" matInput formControlName="Cpf" [matAutocomplete]="auto" (keyup)="filter($event)">
+    <input placeholder="CPF:" matInput formControlName="Cpf" [matAutocomplete]="auto" (keyup)="filter($event)"
+      textMask="{mask: maskCpf}">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of tutores$ | async" (click)="updateForm(option.Cpf)">
         {{option.Cpf}}

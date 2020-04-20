@@ -16,6 +16,9 @@ export class TutoresComponent implements OnInit {
   tutores$: Observable<iTutores[]>;
   filteredOptions: Observable<string[]>;
 
+  maskCpf = [/\d/, /\d/,/\d/, '.', /\d/, /\d/,/\d/, '.', /\d/, /\d/, /\d/,'.', '-', /\d/,/\d/,];
+
+
   tutorForm = this.fb.group({
     Id: [undefined],
     Cpf: ['', [Validators.required]],
