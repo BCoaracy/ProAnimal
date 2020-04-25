@@ -1,8 +1,10 @@
-export interface iAgenda {
-  IdAgendamento: string;
+import { Model } from '../core/model';
+export class iAgenda extends Model {
+  Id: string;
   AnimalChip: string;
-  DataAgendada: Date;
-  DataAgendamento: Date;
+  DataAgendada: string;
+  HoraAgendada: string;
+  DataAgendamento: string;
   ProcedimentoRealizado: Boolean;
   Bloquear: Boolean;
   TecnicoResponsavel: string;
