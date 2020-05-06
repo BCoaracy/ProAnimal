@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatCalendarCellCssClasses, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { iAgenda } from '../models/agenda.model';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar, MAT_DATE_LOCALE } from '@angular/material';
 import { AgendamentoService } from '../services/agendamento.service';
-import { type } from 'os';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -20,12 +21,14 @@ export class AgendamentosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private aService: AgendamentoService
+    private aService: AgendamentoService,
+    private _router: ActivatedRoute
   ) { }
 
   agenda$: Observable<iAgenda>;
   form: FormGroup;
   dataMin = new Date();
+  public IdChip: string;
   horariosLivres = [{ hora: '07:00', valida: true }, { hora: '08:00', valida: true }, { hora: '09:00', valida: true }, { hora: '10:00', valida: true },
   { hora: '11:00', valida: true }, { hora: '12:00', valida: true }, { hora: '13:00', valida: true }, { hora: '14:00', valida: true },
   { hora: '15:00', valida: true }, { hora: '16:00', valida: true }, { hora: '17:00', valida: true }, { hora: '18:00', valida: true }]
@@ -35,8 +38,8 @@ export class AgendamentosComponent implements OnInit {
     this.form = this.fb.group({
       Id: new FormControl(undefined),
       AnimalChip: new FormControl(undefined),
-      DataAgendada: new FormControl('', [Validators.required]),
-      HoraAgendada: new FormControl('', [Validators.required]),
+      DataAgendada: new FormControl("", [Validators.required]),
+      HoraAgendada: new FormControl("", [Validators.required]),
       DataAgendamento: new FormControl(undefined),
       ProcedimentoRealizado: new FormControl(false),
       Bloquear: new FormControl(false),
@@ -46,7 +49,8 @@ export class AgendamentosComponent implements OnInit {
 
   ngOnInit() {
     this.configForm();
-
+    this.IdChip = (this._router.snapshot.paramMap.get('idchip'));
+    console.log('Id enviado = ', this.IdChip)
   }
 
   filtroDiasSemana = (d: Date | null): boolean => {
@@ -63,14 +67,12 @@ export class AgendamentosComponent implements OnInit {
     DataFiltrada.subscribe(rec => {
       for (let x in rec) {
         for (let i in this.horariosLivres) {
-          console.log("Hora agendada: " + rec[x].HoraAgendada + "Horario Livre: " + this.horariosLivres[i].hora)
           if (rec[x].HoraAgendada == this.horariosLivres[i].hora) {
             this.horariosLivres[i].valida = false;
           }
         }
       }
     })
-    console.log(this.horariosLivres)
   }
 
 
@@ -92,9 +94,11 @@ export class AgendamentosComponent implements OnInit {
         this.form.reset();
       })
       .catch(() => {
-        this.snackBar.open('Erro ao submeter o Tutor')
+        this.snackBar.open('Erro ao submeter o agendamento')
       })
   }
+
+ 
 
 
 

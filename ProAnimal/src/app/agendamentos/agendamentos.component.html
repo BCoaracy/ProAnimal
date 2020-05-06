@@ -20,5 +20,15 @@
       </mat-select>
     </ng-container>
   </mat-form-field>
-<button mat-raised-button (click)="onSubmit()">Agendar</button>
+
+
+  <!-- AnimalChip
+  DataAgendada
+  HoraAgendada
+  DataAgendamento
+  ProcedimentoRealizado
+  Bloquear
+  TecnicoResponsavel -->
+
+  <button mat-raised-button (click)="onSubmit()" color='accent' [disabled]="!form.valid">Agendar</button>
 </form>

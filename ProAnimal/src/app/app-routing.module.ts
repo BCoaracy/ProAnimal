@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: 'vacinas', component: VacinasComponent },
   { path: 'doencas', component: DoencasComponent },
   { path: 'tutores', component: TutoresComponent },
-  { path: 'agendamentos', component: AgendamentosComponent },
-  { path: 'principal', component: Component },
+  { path: 'agendamentos/:idchip', component: AgendamentosComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'animais' },
 ];
 
 @NgModule({

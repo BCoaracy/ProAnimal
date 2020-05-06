@@ -1,13 +1,18 @@
 <div>
   <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <span>Pro Animal</span>
+    <div fxLayoutGap="20px">
+      <a mat-raised-button routerLink="/animais" routerLinkActive="mat-accent">Animais</a>
+      <a mat-raised-button routerLink="/vacinas" routerLinkActive="mat-accent">Vacinas</a>
+      <a mat-raised-button routerLink="doencas" routerLinkActive="mat-accent">Doencas</a>
+      <a mat-raised-button routerLink="tutores" routerLinkActive="mat-accent">Tutores</a>
+      <a mat-raised-button routerLink="agendamentos" routerLinkActive="mat-accent">Agendamento</a>
+    </div>
   </mat-toolbar>
-  <div>
-    <a routerLink="/animais" routerLinkActive="active">Animais</a>
-    <a routerLink="/vacinas" routerLinkActive="active">Vacinas</a>
-    <a routerLink="doencas" routerLinkActive="router-link-active">Doencas</a>
-    <a routerLink="tutores" routerLinkActive="router-link-active">Tutores</a>
-    <a routerLink="agendamentos" routerLinkActive="router-link-active">Agendamento</a>
-  </div>
 </div>
+<!--<app-main-nav></app-main-nav> -->
+
 <router-outlet></router-outlet>

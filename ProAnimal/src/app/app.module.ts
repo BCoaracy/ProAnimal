@@ -6,7 +6,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // Import Angular Material
-import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
+import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule, MatSidenavModule } from '@angular/material';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,6 +29,7 @@ import { from } from 'rxjs';
 import { MaterialModule } from './material.module';
 import { HistoricoComponent } from './historico/historico.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
+import { AppMainNavComponent } from './app-main-nav/app-main-nav.component';
 
 
 
@@ -36,6 +37,7 @@ import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AppMainNavComponent,
     AnimaisComponent,
     VacinasComponent,
     DoencasComponent,
@@ -51,6 +53,7 @@ import { AgendamentosComponent } from './agendamentos/agendamentos.component';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    MatSidenavModule,
     MatSliderModule,
     MatSnackBarModule,
     MatToolbarModule,

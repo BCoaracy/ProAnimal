@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../services/animais.service';
+import { PersonaService } from '../services/persona.service';
 import { MatSnackBar } from '@angular/material';
 import { iAnimais } from '../models/animais.model';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { iTutores } from '../models/tutores.model';
+import { Router } from '@angular/router';
+import { AgendamentosComponent } from '../agendamentos/agendamentos.component';
 
 @Component({
   selector: 'app-animais',
@@ -13,30 +16,35 @@ import { iTutores } from '../models/tutores.model';
 })
 export class AnimaisComponent implements OnInit {
 
-  // listaTutores$: Observable<iTutores[]>;
+  tutor$: Observable<iTutores[]>;
   animal$: Observable<iAnimais[]>;
-  form: FormGroup;
-  tabela: FormControl;
+  formCadastro: FormGroup;
+  tabela: FormGroup;
   displayedColumns = ['Nome', 'Tutor', 'Especie', 'Raca', 'Tamanho']
-
   idFormControl = new FormControl(['', [Validators.required]]);
+  recebido: Boolean;
 
   configForm() {
-    this.form = this.fb.group({
-      IdChip: new FormControl(['', [Validators.required]]),
-      Tutor: new FormControl(['', [Validators.required]]),
-      DataNasc: new FormControl(['', [Validators.required]]),
-      Especie: new FormControl(['', [Validators.required]]),
-      Nome: new FormControl(['', [Validators.required]]),
-      Observacoes: new FormControl(['', [Validators.required]]),
-      Raca: new FormControl(['', [Validators.required]]),
-      Tamanho: new FormControl(['', [Validators.required]]),
-      Ocorrencias: new FormControl([''])
-    })
+    this.formCadastro = this.fb.group({
+      IdChip: ([undefined]),
+      Tutor: (['', [Validators.required]]),
+      NomeTutor: [{ value: '', disabled: true }],
+      DataNasc: (['', [Validators.required]]),
+      Especie: (['', [Validators.required]]),
+      Nome: (['', [Validators.required]]),
+      Observacoes: (['', [Validators.required]]),
+      Raca: (['', [Validators.required]]),
+      Tamanho: (['', [Validators.required]]),
+      Ocorrencias: ([''])
+    }),
+      this.tabela = this.fb.group({
+        Nome: (''),
+        Tutor: (''),
+        Especie: (''),
+        Raca: (''),
+        Tamanho: ('')
+      })
   }
-
-
-
 
   tamanhos = [
     { value: 'Pequeno' },
@@ -53,76 +61,113 @@ export class AnimaisComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private animaisService: AnimaisService,
+    private pService: PersonaService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.configForm();
     this.idFormControl.setValue('');
-    this.form.patchValue({
-      'IdChip': '',
-      'Tutor': '',
-      'DataNasc': '',
-      'Especie': '',
-      'Nome': '',
-      'Raca': '',
-      'Tamanho': '',
-      'Observacoes': '',
-    });
     this.animal$ = this.animaisService.getAnimal('0');
-    this.form.setValue(this.animal$);
+    this.recebido = false;
+  }
 
+  disableTutorNome() {
+    this.formCadastro.controls['NomeTutor'].disable();
   }
 
   searchAnimal() {
-    //this.animal$ = this.animaisService.getAnimal(this.idFormControl.value);
     this.animal$ = this.animaisService.getAnimal(this.idFormControl.value);
     this.animal$.subscribe(rec => {
       //this.form.controls['Nome'].patchValue(rec[0].Nome)
-      this.updateForm(rec[0]);
+      try {
+        this.updateForm(rec[0]);
+        this.recebido = true;
+      } catch {
+        this.snackBar.open('Cadastro não encontrado.', 'OK', { duration: 4000 });
+        this.recebido = false;
+      }
     })
 
   }
 
   updateForm(animal: iAnimais) {
-    this.form.controls['IdChip'].patchValue(animal.IdChip);
-    this.form.controls['Tutor'].patchValue(animal.Tutor);
-    this.form.controls['DataNasc'].patchValue(animal.DataNasc);
-    this.form.controls['Especie'].patchValue(animal.Especie);
-    this.form.controls['Nome'].patchValue(animal.Nome);
-    this.form.controls['Raca'].patchValue(animal.Raca);
-    this.form.controls['Tamanho'].patchValue(animal.Tamanho);
-    this.form.controls['Observacoes'].patchValue(animal.Observacoes);
+    this.formCadastro.controls['IdChip'].patchValue(animal.IdChip);
+    this.formCadastro.controls['Tutor'].patchValue(animal.Tutor);
+    this.formCadastro.controls['DataNasc'].patchValue(animal.DataNasc);
+    this.formCadastro.controls['Especie'].patchValue(animal.Especie);
+    this.formCadastro.controls['Nome'].patchValue(animal.Nome);
+    this.formCadastro.controls['Raca'].patchValue(animal.Raca);
+    this.formCadastro.controls['Tamanho'].patchValue(animal.Tamanho);
+    this.formCadastro.controls['Observacoes'].patchValue(animal.Observacoes);
+    // Update nome do tutor
+    this.updateNomeTutor(animal.Tutor);
   }
+
   onSubmit() {
-    if (this.checkCpfTutorExist(this.form.controls['Tutor'].value)) {
-      this.animaisService.createOrUpdate(this.form.value)
-        .then(() => {
-          this.snackBar.open('Adição Completa.', 'OK', { duration: 2000 })
-          this.form.reset()
-        })
-        .catch((error) => {
-          this.snackBar.open('Erro ao salvar. \n ' + error, 'OK', { duration: 2000 })
-        })
+    let a: iAnimais = this.formCadastro.value;
+    if (this.recebido == false) {
+      console.log('Tentando adicionar')
+      this.addAnimal(a);
     } else {
-      this.snackBar.open('Erro ao salvar. O tutor informado não existe. Verifique o CPF informado,' +
-        'ou Adicione esse tutor a base de dados', 'OK', { duration: 2000 });
+      console.log('Tentando updatar')
+      this.updateAnimal(a)
     }
   }
 
-  checkCpfTutorExist(cpf: string): Boolean {
-    if (this.animaisService.searchByCpf(cpf) != null)
+  updateAnimal(a: iAnimais) {
+    this.animaisService.updateAnimal(a)
+      .then(() => {
+        this.snackBar.open('Edição Completa.', 'OK', { duration: 2500 })
+      })
+      .catch(() => {
+        this.snackBar.open('Erro ao submeter a alteração')
+      })
+  }
+
+
+  checkCpfTutorExist(event): Boolean {
+    let cpf: string;
+    cpf = event.target.value;
+    if (cpf.length <= 10) {
+      return false
+    }
+    return this.updateNomeTutor(cpf);
+  }
+
+  updateNomeTutor(cpf: string): Boolean {
+    this.tutor$ = this.pService.searchTutorByCpf(cpf);
+    console.log('buscou o tutor')
+
+    if (this.tutor$ != null) {
+      this.tutor$.subscribe(rec => {
+        try {
+          if (rec[0].Bloqueado == true) {
+            this.snackBar.open('Esse Tutor está impossibilitado de adotar um animal!', 'OK');
+            this.formCadastro.reset();
+            return false;
+          }
+          this.formCadastro.controls['NomeTutor'].patchValue(rec[0].Nome);
+        } catch{
+          this.snackBar.open('Verifiquei se o CPF foi digitado corretamente, ou se o Tutor já está cadastrado.', 'OK');
+        }
+      })
+      console.log("Cpf valido")
       return true;
+    }
+    console.log("Cpf inválido")
     return false;
   }
 
   addAnimal(a: iAnimais) {
-    // this.animaisService.createAnimal(a)
-    //   .then(() => {
-    //     this.snackBar.open('Adição Completa.', 'OK', { duration: 2000 })
-    //   })
-    //   .catch((error) => {
-    //     this.snackBar.open('Erro ao salvar.' + error, 'OK', { duration: 2000 })
-    //   })
+    console.log('Ainda tentando');
+    this.animaisService.createAnimal(a)
+      .then(() => {
+        this.snackBar.open('Adição Completa.', 'OK', { duration: 2000 })
+      })
+      .catch((error) => {
+        this.snackBar.open('Erro ao salvar.' + error, 'OK', { duration: 2000 })
+      })
   }
 
   private listaTutores$: Observable<iTutores[]>;
@@ -134,7 +179,7 @@ export class AnimaisComponent implements OnInit {
   }
 
   abrirAgendamento() {
-
+    this.router.navigate(['../agendamentos', this.formCadastro.controls['IdChip'].value]);
   }
 
 }

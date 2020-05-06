@@ -3,29 +3,25 @@
 
 
   <mat-form-field hintLabel="Somente Números">
-    <input placeholder="CPF:" matInput formControlName="Cpf" [matAutocomplete]="auto" (keyup)="filter($event)"
-      textMask="{mask: maskCpf}">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of tutores$ | async" (click)="updateForm(option.Cpf)">
-        {{option.Cpf}}
-      </mat-option>
-    </mat-autocomplete>
+    <input placeholder="CPF:" matInput formControlName="Cpf" [errorStateMatcher]="matcher" (keyup)="updateForm($event)">
+    <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error> -->
   </mat-form-field>
 
 
-  <!-- <mat-form-field>
-    <input matInput placeholder="CPF:" formControlName="Cpf" #cpf>
-  </mat-form-field> -->
+
   <mat-form-field>
     <input matInput placeholder="Nome Completo:" formControlName="Nome" #nome>
   </mat-form-field>
 
   <mat-slide-toggle formControlName="Bloqueado">Bloquear</mat-slide-toggle>
 
-  <button mat-icon-button type="submit" [disabled]="!tutorForm.valid" (click)="onSubmit()" color="accent">
+  <button mat-icon-button type="submit" [disabled]="btnSalvar==false || !tutorForm.valid" (click)="onSubmit()"
+    color="accent">
     <mat-icon>add</mat-icon>
   </button>
 </form>
-<!-- <ul *ngFor="let item of tutores$ | async">
-  <li>{{item.Nome}}</li>
-</ul> -->

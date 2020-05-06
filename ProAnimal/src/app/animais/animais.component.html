@@ -13,7 +13,8 @@
         </form>
 
         <div>
-          <form [formControl]="tabela">
+          <!-- <form [formControl]="tabela"> -->
+          <form>
             <table mat-table [dataSource]="animal$ | async" style="width: 100%;">
               <ng-container matColumnDef="Nome">
                 <th mat-header-cell *matHeaderCellDef> Nome: </th>
@@ -53,27 +54,25 @@
 
     <mat-tab label="Cadastro">
       <div>
-        <form [formGroup]="form" fxLayout="row">
+        <form [formGroup]="formCadastro" fxLayout="row">
           <mat-form-field>
             <input matInput placeholder="Microchip" formControlName="IdChip">
           </mat-form-field>
           <br>
 
           <mat-form-field>
-            <input type="text" matInput placeholder="CPF do tutor" formControlName="Tutor" [matAutocomplete]="auto"
-              (keyup)="filterCpf($event)">
-            <mat-autocomplete #auto="matAutocomplete">
+            <input type="text" matInput placeholder="CPF do tutor" formControlName="Tutor"
+              (keyup)="checkCpfTutorExist($event)">
+            <!-- <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let tutor of listaTutores$ | async" [value]="tutor">
                 {{tutor.Cpf}}
               </mat-option>
-            </mat-autocomplete>
+            </mat-autocomplete> -->
           </mat-form-field>
 
-          <!-- <mat-form-field>
-            <input matInput type="text" placeholder="CPF do tutor" formControlName="Tutor">
-          </mat-form-field> -->
-
-
+          <mat-form-field>
+            <input matInput placeholder="NomeTutor" formControlName="NomeTutor">
+          </mat-form-field>
           <br>
           <mat-form-field>
             <input matInput type="date" placeholder="DataNasc" formControlName="DataNasc">
@@ -107,11 +106,12 @@
             </mat-select>
           </mat-form-field>
         </form>
-        <button mat-icon-button (click)="onSubmit()" color="accent">
+        <button mat-fab (click)="onSubmit()" color="accent" [disabled]="!formCadastro.valid">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-flat-button (click)="abrirAgendamento()" color="primary"><a routerLink="tutores"
-            routerLinkActive="router-link-active"></a>Agendar</button>
+        <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
+          (click)="abrirAgendamento()">Agendar</button>
+        
 
       </div>
     </mat-tab>

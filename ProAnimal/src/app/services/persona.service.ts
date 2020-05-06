@@ -22,7 +22,7 @@ export class PersonaService {
     return this.tutoresCollection.doc(t.Id).set(t);
   }
 
-  searchTutorByCpf(cpf: string): Observable<iTutores[]> {
+  public searchTutorByCpf(cpf: string): Observable<iTutores[]> {
     return this.afs.collection<iTutores>('tutores',
       ref => ref.orderBy('Cpf').startAt(cpf).endAt(cpf + '\uf8ff'))
       .valueChanges();

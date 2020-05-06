@@ -2,42 +2,40 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { iAnimais } from '../models/animais.model';
-import { iTutores } from '../models/tutores.model';
-import { ServiceFireBase } from '../core/iservicefirebase.service';
-
-@Injectable()
-
-export class AnimaisService extends ServiceFireBase<iAnimais>{
+import { PersonaService } from '../services/persona.service';
 
 
-  // private animCollection: AngularFirestoreCollection<iAnimais>
-  //   = this.afs.collection('animais');
+@Injectable({
+  providedIn: 'root'
+})
 
-  constructor(firestore: AngularFirestore) {
-    super(iAnimais, firestore, 'animais');
-  }
+export class AnimaisService {
+
+  private pService: PersonaService;
+
+  private animaisCollection: AngularFirestoreCollection<iAnimais>
+    = this.afs.collection('animais')
+
+  constructor(private afs: AngularFirestore) { }
 
   getAnimal(idchip: string) {
-    return this.firestore.collection<iAnimais>('animais', ref =>
+    return this.afs.collection<iAnimais>('animais', ref =>
       ref.where('IdChip', '==', idchip)
     ).valueChanges()
   }
 
-  searchByCpf(cpf: string): Observable<iTutores[]> {
-    return this.firestore.collection<iTutores>('tutores',
-      ref => ref.orderBy('cpf').startAt(cpf).endAt(cpf + "\uf8ff"))
-      .valueChanges();
+  searchByCpf(cpf: string) {
+    return this.pService.searchTutorByCpf(cpf);
   }
 
-  // createAnimal(a: iAnimais) {
+  createAnimal(a: iAnimais) {
+    //return this.animaisCollection.add(a);
+    return this.animaisCollection.doc(a.IdChip).set(a);
+  }
 
-  //   if (a == this.getAnimal(a.IdChip)[0]) { console.log('registro igual') } //Não funciona dessa forma
-  //   return this.animCollection.doc(a.IdChip).set(a);
-  // }
-
-  // updateAnimal(a: iAnimais) {
-  //   return this.animCollection.doc(a.IdChip).set(a);
-  // }
+  updateAnimal(a: iAnimais) {
+    return this.animaisCollection.doc(a.IdChip).set(a);
+  }
 
   // deleteAnimal(a: iAnimais) {
   //   return this.animCollection.doc(a.IdChip)
