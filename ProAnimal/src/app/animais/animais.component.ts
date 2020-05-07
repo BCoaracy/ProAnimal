@@ -20,7 +20,7 @@ export class AnimaisComponent implements OnInit {
   animal$: Observable<iAnimais[]>;
   formCadastro: FormGroup;
   tabela: FormGroup;
-  displayedColumns = ['Nome', 'Tutor', 'Especie', 'Raca', 'Tamanho']
+  displayedColumns = ['Nome', 'Tutor', 'Especie', 'Raca', 'Tamanho'];
   idFormControl = new FormControl(['', [Validators.required]]);
   recebido: Boolean;
 
@@ -180,6 +180,11 @@ export class AnimaisComponent implements OnInit {
 
   abrirAgendamento() {
     this.router.navigate(['../agendamentos', this.formCadastro.controls['IdChip'].value]);
+  }
+
+  abrirHistorico() {
+    this.router.navigate(['./animais/historico', this.formCadastro.controls['IdChip'].value]);
+
   }
 
 }

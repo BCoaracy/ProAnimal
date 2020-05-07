@@ -1,5 +1,5 @@
 import { Model } from '../core/model';
-import { Historico } from './historico.model';
+import { iHistorico } from './historico.model';
 
 export class iAnimais extends Model {
   IdChip: string;
@@ -10,5 +10,5 @@ export class iAnimais extends Model {
   Observacoes: string;
   Raca: string;
   Tamanho: string;
-  Ocorrencias: Historico[];
+  Ocorrencias: iHistorico[];
 }

@@ -5,6 +5,7 @@ import { DoencasComponent } from './doencas/doencas.component';
 import { VacinasComponent } from './vacinas/vacinas.component';
 import { TutoresComponent } from './tutores/tutores.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
+import { HistoricoComponent } from './animais/historico/historico.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'doencas', component: DoencasComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: 'agendamentos/:idchip', component: AgendamentosComponent },
+  { path: 'animais/historico/:idchip', component: HistoricoComponent },
   { path: '', pathMatch: 'full', redirectTo: 'animais' },
 ];
 

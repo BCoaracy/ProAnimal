@@ -13,7 +13,6 @@
         </form>
 
         <div>
-          <!-- <form [formControl]="tabela"> -->
           <form>
             <table mat-table [dataSource]="animal$ | async" style="width: 100%;">
               <ng-container matColumnDef="Nome">
@@ -63,11 +62,6 @@
           <mat-form-field>
             <input type="text" matInput placeholder="CPF do tutor" formControlName="Tutor"
               (keyup)="checkCpfTutorExist($event)">
-            <!-- <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let tutor of listaTutores$ | async" [value]="tutor">
-                {{tutor.Cpf}}
-              </mat-option>
-            </mat-autocomplete> -->
           </mat-form-field>
 
           <mat-form-field>
@@ -111,7 +105,9 @@
         </button>
         <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
           (click)="abrirAgendamento()">Agendar</button>
-        
+        <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
+          (click)="abrirHistorico()">Historico</button>
+
 
       </div>
     </mat-tab>

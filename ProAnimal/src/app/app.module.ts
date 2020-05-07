@@ -27,7 +27,7 @@ import { TutoresComponent } from './tutores/tutores.component';
 import { VeterinariosComponent } from './veterinarios/veterinarios.component';
 import { from } from 'rxjs';
 import { MaterialModule } from './material.module';
-import { HistoricoComponent } from './historico/historico.component';
+import { HistoricoComponent } from './animais/historico/historico.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { AppMainNavComponent } from './app-main-nav/app-main-nav.component';
 
