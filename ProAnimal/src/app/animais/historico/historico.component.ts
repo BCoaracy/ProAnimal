@@ -9,6 +9,7 @@ import { iVacinas } from 'src/app/models/vacinas.model';
 import { iDoencas } from 'src/app/models/doencas.model';
 import { iHistorico } from 'src/app/models/historico.model';
 import { HistoricoService } from 'src/app/services/historico.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-historico',
@@ -48,7 +49,12 @@ export class HistoricoComponent implements OnInit {
 
   listarHistorico(a: iAnimais) {
     let historico = a.Ocorrencias;
-
+    let cont = 0;
+    historico.forEach(element => {
+      this.listaHistorico$[cont] =
+        this.hService.getHistorico(element.Id);
+      cont++;
+    })
   }
 
   onSelectTipo(selecionado: string) {
