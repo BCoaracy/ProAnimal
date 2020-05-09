@@ -1,3 +1,10 @@
+<div>
+  <mat-card>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{animal$[0].Nome}}</mat-card-title>
+    <mat-card-subtitle>{{animal$[0].TutorNome}}</mat-card-subtitle>
+  </mat-card>
+</div>
 <form>
   <table mat-table [dataSource]="litaHistoricos$ | async" style="width: 100%;">
     <ng-container matColumnDef="Tipo">
@@ -15,4 +22,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <button mat-raised-button>Novo</button>
+
 </form>

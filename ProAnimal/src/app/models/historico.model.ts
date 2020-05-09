@@ -1,5 +1,5 @@
-import { Model } from '../core/model';
-export class iHistorico extends Model{
+
+export class iHistorico {
   Id: string;
   IdTipo: string;
   Tipo: string;

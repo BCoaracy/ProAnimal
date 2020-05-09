@@ -6,7 +6,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // Import Angular Material
-import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule, MatSidenavModule } from '@angular/material';
+import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule, MatSidenavModule, MatCardModule } from '@angular/material';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -53,6 +53,7 @@ import { AppMainNavComponent } from './app-main-nav/app-main-nav.component';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    MatCardModule,
     MatSidenavModule,
     MatSliderModule,
     MatSnackBarModule,

@@ -15,7 +15,7 @@ export class HistoricoService {
 
   getHistorico(id: string) {
     return this.afs.collection<iHistorico>('historico',
-      ref => ref.where('historico', '==', id))
+      ref => ref.where('idAnimal', '==', id))
       .valueChanges();
   }
 

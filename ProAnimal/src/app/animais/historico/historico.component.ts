@@ -21,8 +21,10 @@ export class HistoricoComponent implements OnInit {
   animal$: Observable<iAnimais[]>;
   listaVacinas$: Observable<iVacinas[]>;
   listaDoencas$: Observable<iDoencas[]>;
-  listaHistorico$: Observable<iHistorico[]>;
+  //listaHistorico$: Observable<iHistorico[]>;
+  listaHistorico$: any;
   displayedColumns = ['Tipo', 'Data', 'Observacao'];
+
 
   constructor(
     private _route: ActivatedRoute,
@@ -48,13 +50,7 @@ export class HistoricoComponent implements OnInit {
 
 
   listarHistorico(a: iAnimais) {
-    let historico = a.Ocorrencias;
-    let cont = 0;
-    historico.forEach(element => {
-      this.listaHistorico$[cont] =
-        this.hService.getHistorico(element.Id);
-      cont++;
-    })
+    this.listaHistorico$ = this.hService.getHistorico(a.IdChip);
   }
 
   onSelectTipo(selecionado: string) {
