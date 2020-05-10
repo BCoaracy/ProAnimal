@@ -1,0 +1,34 @@
+<h2>Histórico</h2>
+<form [formGroup]="formCadHistorico">
+  <mat-form-field [formGroup]="Tipo">
+    <mat-label>Tipo da ocorrencia?</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let tipo of Tipos$" [value]="tipo.value" [(value)]="TipoSelected">
+        {{tipo.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field [formGroup]="IdTipo">
+    <mat-label>{{idtipo}}</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let tipo of Tipos$" [value]="tipo.value">
+        {{tipo.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field [formGroup]="Data">
+    <mat-label>Data do ocorrido:</mat-label>
+    <input matInput [min]="dataMin" [matDatepicker]="picker" [matDatepickerFilter]="filtroDiasSemana">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field [formGroup]="DataRetorno">
+    <mat-label>Data Retorno:</mat-label>
+    <input matInput [min]="dataMin" [matDatepicker]="pickerRetorno" [matDatepickerFilter]="filtroDiasSemana">
+    <mat-datepicker-toggle matSuffix [for]="pickerRetorno"></mat-datepicker-toggle>
+    <mat-datepicker [dateClass]="dateClass" #pickerRetorno></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field [formGroup]="Observacoes">
+    <input matInput placeholder="Observações">
+  </mat-form-field>
+</form>

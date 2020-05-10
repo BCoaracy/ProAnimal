@@ -1,8 +1,9 @@
 <div>
   <mat-card>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{animal$[0].Nome}}</mat-card-title>
-    <mat-card-subtitle>{{animal$[0].TutorNome}}</mat-card-subtitle>
+    <!-- <mat-card-title>{{animal$[0].Nome}}</mat-card-title>
+    <mat-card-subtitle>{{animal$[0].TutorNome}}</mat-card-subtitle> -->
+    <mat-card-title>Nome do Animal</mat-card-title>
+    <mat-card-subtitle>Nome do Tutor</mat-card-subtitle>
   </mat-card>
 </div>
 <form>
@@ -23,6 +24,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button mat-raised-button>Novo</button>
+  <button mat-raised-button (click)="onClickNovo()">Novo</button>
 
 </form>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { iHistorico } from '../models/historico.model';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -13,9 +14,9 @@ export class HistoricoService {
 
   constructor(private afs: AngularFirestore) { }
 
-  getHistorico(id: string) {
+  getHistorico(id: string): Observable<iHistorico[]> {
     return this.afs.collection<iHistorico>('historico',
-      ref => ref.where('idAnimal', '==', id))
+      ref => ref.where('IdAnimal', '==', id))
       .valueChanges();
   }
 
