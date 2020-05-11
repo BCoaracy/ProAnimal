@@ -10,7 +10,7 @@ import { iDoencas } from 'src/app/models/doencas.model';
 import { iHistorico } from 'src/app/models/historico.model';
 import { HistoricoService } from 'src/app/services/historico.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 export interface DialogData {
   Id: string;
@@ -45,17 +45,6 @@ export class HistoricoComponent implements OnInit {
   dataretorno: string;
   observacoes: string;
 
-  configForm() {
-    this.formCadHistorico = this.fb.group({
-      IdTipo: (['', [Validators.required]]),
-      IdAnimal: (['', [Validators.required]]),
-      Tipo: (['', [Validators.required]]),
-      Data: (['', [Validators.required]]),
-      DataRetorno: (['']),
-      Observacoes: (['', [Validators.required]])
-    })
-  }
-
 
 
   constructor(
@@ -64,6 +53,7 @@ export class HistoricoComponent implements OnInit {
     private hService: HistoricoService,
     public dialog: MatDialog,
     public fb: FormBuilder
+
   ) { }
 
   ngOnInit() {
@@ -73,6 +63,7 @@ export class HistoricoComponent implements OnInit {
       this.listarHistorico(rec[0]);
     })
   }
+
 
 
   Tipos = [
@@ -89,18 +80,9 @@ export class HistoricoComponent implements OnInit {
     this.listaHistorico$ = this.hService.getHistorico(a.IdChip);
     this.listaHistorico$.subscribe(ref => {
       ref.forEach(element => {
-        console.log(element.Observacoes)
+
       });
     })
-  }
-  dataMin = new Date();
-  filtroDiasSemana = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    return day !== 0 && day !== 6;
-  }
-
-  onSelectTipo(selecionado: string) {
-
   }
 
   onClickNovo(): void {
@@ -115,23 +97,44 @@ export class HistoricoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.animal = result;
+      console.log(result)
     });
   }
 
 }
+
 @Component({
   selector: 'historicoDialog',
   templateUrl: 'historicoDialog.html',
 })
 export class HistoricoDialog {
 
+
   constructor(
+    public fb: FormBuilder,
+    public vService: VacinasService,
+    private hService: HistoricoService,
     public dialogRef: MatDialogRef<HistoricoDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
+  formCadHistorico: FormGroup;
+
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  ngOnInit(): void {
+    this.configForm();
+  }
+  configForm() {
+    this.formCadHistorico = this.fb.group({
+      IdTipo: new FormControl('', [Validators.required]),
+      IdAnimal: new FormControl(['', [Validators.required]]),
+      Tipo: new FormControl('', [Validators.required]),
+      Data: new FormControl(['', [Validators.required]]),
+      DataRetorno: new FormControl(['']),
+      Observacoes: (["", [Validators.required]])
+    })
   }
 
   Tipos$ = [
@@ -140,8 +143,34 @@ export class HistoricoDialog {
     { value: 'Zoonose', valueIn: 3 }
   ]
 
-  getDataOcorrido(event: MatDatepickerInputEvent<Date>) {
-    //this.form.controls['DataAgendada'].patchValue(event.value.toISOString().slice(0, 10));
+  //  listaTipos = [{value: '', idValue: ''}]
+  listaTipos$: Observable<iVacinas[]>;
+
+  dataMin = new Date();
+  filtroDiasSemana = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    return day !== 0 && day !== 6;
+  }
+
+  getData(event: MatDatepickerInputEvent<Date>) {
+    console.log(event.target.value);
+    this.formCadHistorico.controls['Data'].patchValue(event.value.toISOString().slice(0, 10));
+  }
+
+  onSelectTipo(event) {
+    if (event.value == 'Vacina') {
+      this.getListaVacinas();
+    }
+  }
+
+  getListaVacinas() {
+    this.listaTipos$ = this.vService.getVacinas();
+  }
+
+  salvarHistorico() {
+    let h: iHistorico = this.formCadHistorico.value;
+    this.hService.addHistorico(h);
+
   }
 
 }

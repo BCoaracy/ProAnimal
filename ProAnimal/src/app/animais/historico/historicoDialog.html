@@ -1,34 +1,41 @@
 <h2>Histórico</h2>
 <form [formGroup]="formCadHistorico">
-  <mat-form-field [formGroup]="Tipo">
+  <mat-form-field>
     <mat-label>Tipo da ocorrencia?</mat-label>
-    <mat-select>
+    <mat-select formControlName="Tipo" (selectionChange)="onSelectTipo($event)">
       <mat-option *ngFor="let tipo of Tipos$" [value]="tipo.value" [(value)]="TipoSelected">
         {{tipo.value}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field [formGroup]="IdTipo">
+  <mat-form-field>
     <mat-label>{{idtipo}}</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let tipo of Tipos$" [value]="tipo.value">
-        {{tipo.value}}
+    <mat-select formControlName="IdTipo">
+      <mat-option *ngFor="let tipo of listaTipos$ | async" [value]="tipo.Id">
+        {{tipo.Nome}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field [formGroup]="Data">
+  <mat-form-field>
     <mat-label>Data do ocorrido:</mat-label>
-    <input matInput [min]="dataMin" [matDatepicker]="picker" [matDatepickerFilter]="filtroDiasSemana">
+    <input matInput [min]="dataMin" [matDatepicker]="picker" [matDatepickerFilter]="filtroDiasSemana"
+      formControlName="Data">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field [formGroup]="DataRetorno">
+  <mat-form-field>
     <mat-label>Data Retorno:</mat-label>
-    <input matInput [min]="dataMin" [matDatepicker]="pickerRetorno" [matDatepickerFilter]="filtroDiasSemana">
+    <input matInput [min]="dataMin" [matDatepicker]="pickerRetorno" [matDatepickerFilter]="filtroDiasSemana"
+      formControlName="DataRetorno">
     <mat-datepicker-toggle matSuffix [for]="pickerRetorno"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="dateClass" #pickerRetorno></mat-datepicker>
   </mat-form-field>
-  <mat-form-field [formGroup]="Observacoes">
-    <input matInput placeholder="Observações">
+  <mat-form-field>
+    <input matInput placeholder="Observações" formControlName="Observacoes">
   </mat-form-field>
+
+  <button mat-mini-fab color="primary" [disabled]="!formCadHistorico.valid" (click)="salvarHistorico()">
+    <mat-icon>add</mat-icon>
+  </button>
+
 </form>

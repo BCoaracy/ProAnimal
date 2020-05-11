@@ -20,7 +20,7 @@ export class HistoricoService {
       .valueChanges();
   }
 
-  addTutor(h: iHistorico) {
+  addHistorico(h: iHistorico) {
     h.Id = this.afs.createId();
     return this.historicoCollection.doc(h.Id).set(h);
   }
