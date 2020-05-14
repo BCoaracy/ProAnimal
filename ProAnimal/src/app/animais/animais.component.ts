@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../services/animais.service';
 import { PersonaService } from '../services/persona.service';
+import { HistoricoService } from '../services/historico.service';
 import { MatSnackBar } from '@angular/material';
 import { iAnimais } from '../models/animais.model';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { iTutores } from '../models/tutores.model';
 import { Router } from '@angular/router';
 import { AgendamentosComponent } from '../agendamentos/agendamentos.component';
+import { iHistorico } from '../models/historico.model';
 
 @Component({
   selector: 'app-animais',
@@ -23,6 +25,10 @@ export class AnimaisComponent implements OnInit {
   displayedColumns = ['Nome', 'Tutor', 'Especie', 'Raca', 'Tamanho'];
   idFormControl = new FormControl(['', [Validators.required]]);
   recebido: Boolean;
+  ListaHistorico$: Observable<iHistorico[]>;
+  tabelaHistorico = false;
+
+  displayedColumnsHist = ['Tipo', 'Data', 'Observacao'];
 
   configForm() {
     this.formCadastro = this.fb.group({
@@ -32,7 +38,7 @@ export class AnimaisComponent implements OnInit {
       DataNasc: (['', [Validators.required]]),
       Especie: (['', [Validators.required]]),
       Nome: (['', [Validators.required]]),
-      Observacoes: (['', [Validators.required]]),
+      Observacoes: (''),
       Raca: (['', [Validators.required]]),
       Tamanho: (['', [Validators.required]]),
       Ocorrencias: ([''])
@@ -62,8 +68,11 @@ export class AnimaisComponent implements OnInit {
     private snackBar: MatSnackBar,
     private animaisService: AnimaisService,
     private pService: PersonaService,
+    private hService: HistoricoService,
     private router: Router
   ) { }
+
+
 
   ngOnInit() {
     this.configForm();
@@ -79,12 +88,17 @@ export class AnimaisComponent implements OnInit {
   searchAnimal() {
     this.animal$ = this.animaisService.getAnimal(this.idFormControl.value);
     this.animal$.subscribe(rec => {
-      //this.form.controls['Nome'].patchValue(rec[0].Nome)
       try {
+        this.ListaHistorico$ = this.hService.getHistorico(rec[0].IdChip);
+        this.ListaHistorico$.subscribe(rec => {
+          console.log(rec)
+        })
+        this.tabelaHistorico = true;
         this.updateForm(rec[0]);
         this.recebido = true;
-      } catch {
+      } catch (error) {
         this.snackBar.open('Cadastro não encontrado.', 'OK', { duration: 4000 });
+        console.log(error);
         this.recebido = false;
       }
     })
@@ -174,9 +188,9 @@ export class AnimaisComponent implements OnInit {
 
 
 
-  filterCpf(event) {
-    this.listaTutores$ = this.animaisService.searchByCpf(event.target.value);
-  }
+  // filterCpf(event) {
+  //   this.listaTutores$ = this.animaisService.searchByCpf(event.target.value);
+  // }
 
   abrirAgendamento() {
     this.router.navigate(['../agendamentos', this.formCadastro.controls['IdChip'].value]);

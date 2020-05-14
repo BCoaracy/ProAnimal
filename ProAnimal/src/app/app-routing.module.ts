@@ -6,11 +6,13 @@ import { VacinasComponent } from './vacinas/vacinas.component';
 import { TutoresComponent } from './tutores/tutores.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { HistoricoComponent } from './animais/historico/historico.component';
+import { VermifugosComponent } from './vermifugos/vermifugos.component';
 
 
 const routes: Routes = [
   { path: 'animais', component: AnimaisComponent },
   { path: 'vacinas', component: VacinasComponent },
+  { path: 'vermifugos', component: VermifugosComponent },
   { path: 'doencas', component: DoencasComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: 'agendamentos/:idchip', component: AgendamentosComponent },

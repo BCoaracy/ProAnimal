@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 // Import Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // Import Angular Material
-import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule, MatSidenavModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule, MatSidenavModule, MatCardModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,6 +30,12 @@ import { MaterialModule } from './material.module';
 import { HistoricoComponent, HistoricoDialog } from './animais/historico/historico.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { AppMainNavComponent } from './app-main-nav/app-main-nav.component';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr)
+import { MatMomentDateModule, MomentDateAdapter, MAT_MOMENT_DATE_FORMATS, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { VermifugosComponent } from './vermifugos/vermifugos.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +48,8 @@ import { AppMainNavComponent } from './app-main-nav/app-main-nav.component';
     VeterinariosComponent,
     HistoricoComponent,
     HistoricoDialog,
-    AgendamentosComponent
+    AgendamentosComponent,
+    VermifugosComponent
   ],
   imports: [
     BrowserModule,
@@ -67,12 +74,23 @@ import { AppMainNavComponent } from './app-main-nav/app-main-nav.component';
     MatTableModule,
     MaterialModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMomentDateModule
   ],
   entryComponents: [
     HistoricoDialog
   ],
-  providers: [AnimaisService],
+  providers: [
+    AnimaisService,
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

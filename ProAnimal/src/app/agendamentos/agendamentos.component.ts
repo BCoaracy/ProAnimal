@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, LOCALE_ID } from '@angular/core';
 import { MatCalendarCellCssClasses, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { iAgenda } from '../models/agenda.model';
 import { Observable, from } from 'rxjs';
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-agendamentos',
   templateUrl: './agendamentos.component.html',
   styleUrls: ['./agendamentos.component.css'],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
+  //providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}],
   encapsulation: ViewEncapsulation.None,
 })
 export class AgendamentosComponent implements OnInit {
@@ -53,10 +53,10 @@ export class AgendamentosComponent implements OnInit {
     console.log('Id enviado = ', this.IdChip)
   }
 
-  filtroDiasSemana = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    return day !== 0 && day !== 6;
-  }
+  // filtroDiasSemana = (d: Date | null): boolean => {
+  //   const day = (d || new Date()).getDay();
+  //   return day !== 0 && day !== 6;
+  // }
 
   getDataAgendada(event: MatDatepickerInputEvent<Date>) {
     this.form.controls['DataAgendada'].patchValue(event.value.toISOString().slice(0, 10));
@@ -97,9 +97,5 @@ export class AgendamentosComponent implements OnInit {
         this.snackBar.open('Erro ao submeter o agendamento')
       })
   }
-
- 
-
-
 
 }

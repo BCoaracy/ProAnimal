@@ -19,15 +19,15 @@
   <mat-form-field>
     <mat-label>Data do ocorrido:</mat-label>
     <input matInput [min]="dataMin" [matDatepicker]="picker" [matDatepickerFilter]="filtroDiasSemana"
-      formControlName="Data">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      formControlName="Data" (dateInput)="getData($event)">
+    <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Data Retorno:</mat-label>
     <input matInput [min]="dataMin" [matDatepicker]="pickerRetorno" [matDatepickerFilter]="filtroDiasSemana"
-      formControlName="DataRetorno">
-    <mat-datepicker-toggle matSuffix [for]="pickerRetorno"></mat-datepicker-toggle>
+      formControlName="DataRetorno" (dateInput)="getDataRetorno($event)">
+    <mat-datepicker-toggle matSuffix [for]=" pickerRetorno"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="dateClass" #pickerRetorno></mat-datepicker>
   </mat-form-field>
   <mat-form-field>

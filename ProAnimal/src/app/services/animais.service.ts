@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { iAnimais } from '../models/animais.model';
 import { PersonaService } from '../services/persona.service';
+import { HistoricoService } from '../services/historico.service';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { PersonaService } from '../services/persona.service';
 export class AnimaisService {
 
   private pService: PersonaService;
+  private hService: HistoricoService;
 
   private animaisCollection: AngularFirestoreCollection<iAnimais>
     = this.afs.collection('animais')
@@ -42,6 +44,9 @@ export class AnimaisService {
   //     .delete();
   // }
 
+  getHistoricoAnimal(idchip: string) {
+    return this.hService.getHistorico(idchip)
+  }
 
 
 

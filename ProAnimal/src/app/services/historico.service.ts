@@ -14,7 +14,7 @@ export class HistoricoService {
 
   constructor(private afs: AngularFirestore) { }
 
-  getHistorico(id: string): Observable<iHistorico[]> {
+  public getHistorico(id: string): Observable<iHistorico[]> {
     return this.afs.collection<iHistorico>('historico',
       ref => ref.where('IdAnimal', '==', id))
       .valueChanges();
