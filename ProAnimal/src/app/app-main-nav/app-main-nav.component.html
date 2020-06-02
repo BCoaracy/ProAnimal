@@ -1,24 +1,27 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="src/app/animais">Animais</a>
-      <a mat-list-item routerLink="../vacinas" routerLinkActive="mat-accent">Vacinas</a>
-      <a mat-list-item routerLink="../doencas" routerLinkActive="mat-accent">Doencas</a>
-      <a mat-list-item routerLink="../tutores" routerLinkActive="mat-accent">Tutores</a>
-      <a mat-list-item routerLink="../agendamentos" routerLinkActive="mat-accent">Agendamento</a>
+      <a mat-list-item routerLink="../animais" (click)="drawer.toggle()">Animais</a>
+      <a mat-list-item routerLink="../animaisAdocao" (click)="drawer.toggle()">Adote um pet</a>
+      <a mat-list-item routerLink="../vacinas" routerLinkActive="mat-accent" (click)="drawer.toggle()">Vacinas</a>
+      <a mat-list-item routerLink="../doencas" routerLinkActive="mat-accent" (click)="drawer.toggle()">Doencas</a>
+      <a mat-list-item routerLink="../vermifugos" routerLinkActive="mat-accent" (click)="drawer.toggle()">Vermifugos</a>
+      <a mat-list-item routerLink="../tutores" routerLinkActive="mat-accent" (click)="drawer.toggle()">Tutores</a>
+      <a mat-list-item routerLink="../veterinarios" routerLinkActive="mat-accent"
+        (click)="drawer.toggle()">Veterinarios</a>
+
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu
+        </mat-icon>
       </button>
-      <span>ProAnimal</span>
+      <span>ChiPet - Animal Care</span>
     </mat-toolbar>
-
+    <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

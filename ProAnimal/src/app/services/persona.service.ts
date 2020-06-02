@@ -40,6 +40,7 @@ export class PersonaService {
 
   //#region Endereço -----------------------------------------------------------
   addEndereco(t: iEndereco) {
+    t.Id = this.afs.createId();
     return this.enderecosCollection.doc(t.cpf).set(t);
   }
 
@@ -48,7 +49,7 @@ export class PersonaService {
   }
 
   getEndereco(cpf: string): Observable<iEndereco[]> {
-    return this.afs.collection<iEndereco>('endereco',
+    return this.afs.collection<iEndereco>('enderecos',
       ref => ref.where('cpf', '==', cpf))
       .valueChanges();
   }
@@ -68,5 +69,12 @@ export class PersonaService {
       ref => ref.orderBy('Nome').startAt(Nome).endAt(Nome + '\uf8ff'))
       .valueChanges();
   }
+  searchVetByCpf(cpf: string): Observable<iVeterinario[]> {
+    return this.afs.collection<iVeterinario>('veterinarios',
+      ref => ref.orderBy('Cpf').startAt(cpf).endAt(cpf + '\uf8ff'))
+      .valueChanges();
+  }
+
+
   //#endregion
 }

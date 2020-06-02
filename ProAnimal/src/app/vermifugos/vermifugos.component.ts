@@ -14,13 +14,13 @@ export class VermifugosComponent implements OnInit {
 
   vermifugos$: Observable<iVermifugo[]>;
   filterVer$: Observable<iVermifugo[]>;
-  displayedColumns = ['NomeComercial', 'Principio', 'Funcoes'];
+  displayedColumns = ['Nome', 'Principio', 'Funcoes'];
 
   @ViewChild('nome', { static: false }) verNome: ElementRef;
 
   verForm = this.fb.group({
-    IdVermigugos: [undefined],
-    NomeComercial: ['', [Validators.required]],
+    Id: [undefined],
+    Nome: ['', [Validators.required]],
     Principio: ['', [Validators.required]]
   })
 
@@ -38,7 +38,7 @@ export class VermifugosComponent implements OnInit {
 
   onSubmit() {
     let v: iVermifugo = this.verForm.value;
-    if (!v.IdVermigugos) {
+    if (!v.Id) {
       this.addVermifugo(v);
     } else {
       this.updateVermifugo(v);
@@ -49,7 +49,7 @@ export class VermifugosComponent implements OnInit {
     this.vService.addVermifugos(v)
       .then(() => {
         this.snackBar.open('Item Adicionado.', 'OK', { duration: 2500 })
-        this.verForm.reset({ NomeComercial: '', Principio: '', IdVermigugos: undefined });
+        this.verForm.reset({ Nome: '', Principio: '', Id: undefined });
         this.verNome.nativeElement.focus();
       })
       .catch(() => {
@@ -61,7 +61,7 @@ export class VermifugosComponent implements OnInit {
     this.vService.updateVermifugos(v)
       .then(() => {
         this.snackBar.open('Vacina Editada', 'OK', { duration: 2000 })
-        this.verForm.reset({  NomeComercial: '', Principio: '', IdVermigugos: undefined });
+        this.verForm.reset({ Nome: '', Principio: '', Id: undefined });
         this.verNome.nativeElement.focus();
       })
       .catch((e) => {
@@ -72,7 +72,6 @@ export class VermifugosComponent implements OnInit {
 
   edit(v: iVermifugo) {
     this.verForm.setValue(v);
-    // this.vacinaService.updateVacina(v);
   }
 
   del(v: iVermifugo) {

@@ -26,6 +26,12 @@ export class AnimaisService {
     ).valueChanges()
   }
 
+  getAnimaisAdocao() {
+    return this.afs.collection<iAnimais>('animais', ref =>
+      ref.where('Adocao', '==', true)
+    ).valueChanges()
+  }
+
   searchByCpf(cpf: string) {
     return this.pService.searchTutorByCpf(cpf);
   }

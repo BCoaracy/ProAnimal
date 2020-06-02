@@ -1,5 +1,5 @@
 export interface iVermifugo {
-  IdVermigugos: string;
-  NomeComercial: string;
+  Id: string;
+  Nome: string;
   PrincipioAtivo: string;
 }

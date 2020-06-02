@@ -24,11 +24,21 @@ export class AnimaisComponent implements OnInit {
   tabela: FormGroup;
   displayedColumns = ['Nome', 'Tutor', 'Especie', 'Raca', 'Tamanho'];
   idFormControl = new FormControl(['', [Validators.required]]);
-  recebido: Boolean;
+  recebido: boolean;
   ListaHistorico$: Observable<iHistorico[]>;
   tabelaHistorico = false;
 
   displayedColumnsHist = ['Tipo', 'Data', 'Observacao'];
+  tamanhos = [
+    { value: 'Pequeno' },
+    { value: 'Medio' },
+    { value: 'Grande' }
+  ];
+  especies = [
+    { value: 'Canina' },
+    { value: 'Felina' },
+    { value: 'Outros' }
+  ];
 
   configForm() {
     this.formCadastro = this.fb.group({
@@ -41,7 +51,7 @@ export class AnimaisComponent implements OnInit {
       Observacoes: (''),
       Raca: (['', [Validators.required]]),
       Tamanho: (['', [Validators.required]]),
-      Ocorrencias: ([''])
+      Adocao: (false)
     }),
       this.tabela = this.fb.group({
         Nome: (''),
@@ -49,19 +59,9 @@ export class AnimaisComponent implements OnInit {
         Especie: (''),
         Raca: (''),
         Tamanho: ('')
-      })
+      });
   }
 
-  tamanhos = [
-    { value: 'Pequeno' },
-    { value: 'Medio' },
-    { value: 'Grande' }
-  ]
-  especies = [
-    { value: 'Canina' },
-    { value: 'Felina' },
-    { value: 'Outros' }
-  ]
 
   constructor(
     private fb: FormBuilder,
@@ -90,9 +90,6 @@ export class AnimaisComponent implements OnInit {
     this.animal$.subscribe(rec => {
       try {
         this.ListaHistorico$ = this.hService.getHistorico(rec[0].IdChip);
-        this.ListaHistorico$.subscribe(rec => {
-          console.log(rec)
-        })
         this.tabelaHistorico = true;
         this.updateForm(rec[0]);
         this.recebido = true;
@@ -101,7 +98,7 @@ export class AnimaisComponent implements OnInit {
         console.log(error);
         this.recebido = false;
       }
-    })
+    });
 
   }
 
@@ -114,12 +111,13 @@ export class AnimaisComponent implements OnInit {
     this.formCadastro.controls['Raca'].patchValue(animal.Raca);
     this.formCadastro.controls['Tamanho'].patchValue(animal.Tamanho);
     this.formCadastro.controls['Observacoes'].patchValue(animal.Observacoes);
-    // Update nome do tutor
+    this.formCadastro.controls['Adocao'].patchValue(animal.Adocao);
     this.updateNomeTutor(animal.Tutor);
   }
 
   onSubmit() {
     let a: iAnimais = this.formCadastro.value;
+    a.NomeTutor = this.formCadastro.controls['NomeTutor'].value;
     if (this.recebido == false) {
       console.log('Tentando adicionar')
       this.addAnimal(a);
@@ -130,6 +128,7 @@ export class AnimaisComponent implements OnInit {
   }
 
   updateAnimal(a: iAnimais) {
+    console.log(a);
     this.animaisService.updateAnimal(a)
       .then(() => {
         this.snackBar.open('Edição Completa.', 'OK', { duration: 2500 })
@@ -174,7 +173,7 @@ export class AnimaisComponent implements OnInit {
   }
 
   addAnimal(a: iAnimais) {
-    console.log('Ainda tentando');
+
     this.animaisService.createAnimal(a)
       .then(() => {
         this.snackBar.open('Adição Completa.', 'OK', { duration: 2000 })
@@ -184,13 +183,6 @@ export class AnimaisComponent implements OnInit {
       })
   }
 
-  private listaTutores$: Observable<iTutores[]>;
-
-
-
-  // filterCpf(event) {
-  //   this.listaTutores$ = this.animaisService.searchByCpf(event.target.value);
-  // }
 
   abrirAgendamento() {
     this.router.navigate(['../agendamentos', this.formCadastro.controls['IdChip'].value]);

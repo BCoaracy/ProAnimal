@@ -7,11 +7,14 @@ import { DoencasService } from 'src/app/services/doencas.service';
 import { Observable } from 'rxjs';
 import { iVacinas } from 'src/app/models/vacinas.model';
 import { iDoencas } from 'src/app/models/doencas.model';
+import { iOutros } from 'src/app/models/Outros.model';
 import { iHistorico } from 'src/app/models/historico.model';
 import { HistoricoService } from 'src/app/services/historico.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
+import { VermifugosService } from 'src/app/services/vermifugos.service';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 
 export interface DialogData {
   Id: string;
@@ -37,7 +40,9 @@ export class HistoricoComponent implements OnInit {
   listaHistoricos$: Observable<iHistorico[]>;
   formCadHistorico: FormGroup;
   IdAnimal = '';
-  displayedColumns = ['Tipo', 'Data', 'Observacao'];
+  NomeAnimal: string;
+  NomeTutor: string;
+  displayedColumns = ['Tipo', 'Data', 'Observacoes'];
 
   //DataDialog
   idtipo: string;
@@ -63,6 +68,8 @@ export class HistoricoComponent implements OnInit {
     this.listaHistoricos$ = this.hService.getHistorico(this.IdAnimal);
     this.animal$ = this.aService.getAnimal(this.IdAnimal);
     this.animal$.subscribe(rec => {
+      this.NomeAnimal = rec[0].Nome;
+      this.NomeTutor = rec[0].NomeTutor;
       this.listarHistorico(rec[0]);
     })
   }
@@ -112,6 +119,8 @@ export class HistoricoDialog {
     public fb: FormBuilder,
     public vService: VacinasService,
     public hService: HistoricoService,
+    public verService: VermifugosService,
+    public zService: DoencasService,
     public dialogRef: MatDialogRef<HistoricoDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
@@ -160,16 +169,28 @@ export class HistoricoDialog {
   }
 
   onSelectTipo(event) {
+    if (this.formCadHistorico.controls['IdTipo'].disabled) {
+      this.formCadHistorico.controls['IdTipo'].enable();
+    }
     if (event.value == 'Vacina') {
       this.getListaVacinas();
     }
     if (event.value == 'Vermifugo') {
-      //this.getListaVermifugos()
+      this.getListaVermifugos()
     } if (event.value == 'Zoonose') {
-      //this.getListaZoonoses();
+      this.getListaZoonoses();
     } if (event.value == 'Outro') {
-      //this.selecionadoOutros();
+      this.selecionadoOutros();
     }
+  }
+  selecionadoOutros() {
+    this.formCadHistorico.controls['IdTipo'].disable();
+  }
+  getListaZoonoses() {
+    this.listaTipos$ = this.zService.getDoencas();
+  }
+  getListaVermifugos() {
+    this.listaTipos$ = this.verService.getVermifugos();
   }
 
   getListaVacinas() {
@@ -177,7 +198,7 @@ export class HistoricoDialog {
   }
 
   salvarHistorico() {
-    console.log(this.formCadHistorico.value);
+
     let h: iHistorico = this.formCadHistorico.value;
     this.hService.addHistorico(h)
       .then(() => {

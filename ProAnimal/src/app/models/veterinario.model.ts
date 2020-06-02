@@ -1,6 +1,6 @@
 export interface iVeterinario {
   Id: string;
-  CRMV: string;
+  Crmv: string;
   Cpf: string;
   Nome: string;
   DataNasc: Date;

@@ -1,0 +1,18 @@
+<mat-grid-list cols="1" rowHeight="120px">
+  <mat-grid-tile *ngFor="let animal of animais$ | async">
+    <mat-card style="padding: 0%; width: 100%;">
+      <mat-card-header>
+        <mat-card-title>{{animal.Nome}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Animal para adoção!</p>
+        <span>Especie: {{animal.Especie}} Nascido em {{animal.DataNasc}}, seu tamanho é
+          {{animal.Tamanho}}!
+          {{animal.Observacoes}}
+        </span>
+      </mat-card-content>
+    </mat-card>
+    <br>
+  </mat-grid-tile>
+</mat-grid-list>

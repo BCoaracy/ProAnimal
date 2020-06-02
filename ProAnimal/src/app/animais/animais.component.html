@@ -6,7 +6,7 @@
           <mat-form-field>
             <input matInput [formControl]="idFormControl" placeholder="Microchip">
           </mat-form-field>
-          <button mat-icon-button (click)="searchAnimal()" color="accent">
+          <button mat-mini-fab (click)="searchAnimal()" color="accent">
             <mat-icon>search</mat-icon>
           </button>
           <br>
@@ -115,6 +115,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <br>
+          <mat-slide-toggle formControlName="Adocao">Animal para Adoção?</mat-slide-toggle>
         </form>
         <button mat-fab (click)="onSubmit()" color="accent" [disabled]="!formCadastro.valid">
           <mat-icon>add</mat-icon>

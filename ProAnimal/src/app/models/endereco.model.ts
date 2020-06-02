@@ -1,4 +1,5 @@
 export interface iEndereco {
+  Id: string;
   cpf: string;
   Bairro: string;
   Logradouro: string;

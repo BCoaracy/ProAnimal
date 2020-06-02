@@ -19,17 +19,17 @@ export class VermifugosService {
 
   addVermifugos(v: iVermifugo) {
 
-    v.IdVermigugos = this.afs.createId();
-    return this.vermifugosCollection.doc(v.IdVermigugos).set(v);
+    v.Id = this.afs.createId();
+    return this.vermifugosCollection.doc(v.Id).set(v);
     // return this.vermifugosCollection.add(v);
   }
 
   updateVermifugos(v: iVermifugo) {
-    return this.vermifugosCollection.doc(v.IdVermigugos).set(v);
+    return this.vermifugosCollection.doc(v.Id).set(v);
   }
 
   deleteVermifugos(v: iVermifugo) {
-    return this.vermifugosCollection.doc(v.IdVermigugos).delete();
+    return this.vermifugosCollection.doc(v.Id).delete();
   }
 
   searchByName(nome: string): Observable<iVermifugo[]> {

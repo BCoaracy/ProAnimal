@@ -3,7 +3,7 @@
 
     <form [formGroup]="verForm">
       <mat-form-field>
-        <input matInput (ngSubmit)="onSubmit()" placeholder="Vermifugo:" formControlName="NomeComercial" #nome>
+        <input matInput (ngSubmit)="onSubmit()" placeholder="Vermifugo:" formControlName="Nome" #nome>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Principio ativo" formControlName="Principio" #finalidade>
@@ -14,9 +14,9 @@
     </form>
 
     <table mat-table #table [dataSource]="vermifugos$ | async" style="width: 100%;" class="mat-elevation-z8">
-      <ng-container matColumnDef="NomeComercial">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{element.NomeComercial}} </td>
+      <ng-container matColumnDef="Nome">
+        <th mat-header-cell *matHeaderCellDef> Nome Comercial</th>
+        <td mat-cell *matCellDef="let element"> {{element.Nome}} </td>
       </ng-container>
       <ng-container matColumnDef="Principio">
         <th mat-header-cell *matHeaderCellDef> Finalidade </th>
@@ -38,7 +38,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-tab>
-  <mat-tab label="Buscar">
+  <!-- <mat-tab label="Buscar">
     <div fxLayout="column" fxLayoutAlign="space-around strech" style="padding: 20px;">
       <mat-form-field>
         <input matInput autocomplete="off" placeholder="Buscar Vacinas" (keyup)="filter($event)">
@@ -47,5 +47,5 @@
     <ul *ngFor="let item of filterVax$ | async">
       <li>{{item.Nome}}</li>
     </ul>
-  </mat-tab>
+  </mat-tab> -->
 </mat-tab-group>

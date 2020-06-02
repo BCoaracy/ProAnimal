@@ -34,8 +34,14 @@
     <input matInput placeholder="Observações" formControlName="Observacoes">
   </mat-form-field>
 
-  <button mat-mini-fab color="primary" [disabled]="!formCadHistorico.valid" (click)="salvarHistorico()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <mat-dialog-actions align="end">
+    <button mat-mini-fab mat-dialog-close color="warn">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" [disabled]="!formCadHistorico.valid" (click)="salvarHistorico()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-dialog-actions>
+
 
 </form>

@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-agendamentos',
   templateUrl: './agendamentos.component.html',
   styleUrls: ['./agendamentos.component.css'],
-  //providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}],
   encapsulation: ViewEncapsulation.None,
 })
 export class AgendamentosComponent implements OnInit {
@@ -22,7 +21,7 @@ export class AgendamentosComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private aService: AgendamentoService,
-    private _router: ActivatedRoute
+    private router: ActivatedRoute
   ) { }
 
   agenda$: Observable<iAgenda>;
@@ -31,26 +30,25 @@ export class AgendamentosComponent implements OnInit {
   public IdChip: string;
   horariosLivres = [{ hora: '07:00', valida: true }, { hora: '08:00', valida: true }, { hora: '09:00', valida: true }, { hora: '10:00', valida: true },
   { hora: '11:00', valida: true }, { hora: '12:00', valida: true }, { hora: '13:00', valida: true }, { hora: '14:00', valida: true },
-  { hora: '15:00', valida: true }, { hora: '16:00', valida: true }, { hora: '17:00', valida: true }, { hora: '18:00', valida: true }]
+  { hora: '15:00', valida: true }, { hora: '16:00', valida: true }, { hora: '17:00', valida: true }, { hora: '18:00', valida: true }];
 
 
   configForm() {
     this.form = this.fb.group({
       Id: new FormControl(undefined),
       AnimalChip: new FormControl(undefined),
-      DataAgendada: new FormControl("", [Validators.required]),
-      HoraAgendada: new FormControl("", [Validators.required]),
+      DataAgendada: new FormControl('', [Validators.required]),
+      HoraAgendada: new FormControl('', [Validators.required]),
       DataAgendamento: new FormControl(undefined),
       ProcedimentoRealizado: new FormControl(false),
       Bloquear: new FormControl(false),
       TecnicoResponsavel: new FormControl(undefined)
-    })
+    });
   }
 
   ngOnInit() {
     this.configForm();
-    this.IdChip = (this._router.snapshot.paramMap.get('idchip'));
-    console.log('Id enviado = ', this.IdChip)
+    this.IdChip = (this.router.snapshot.paramMap.get('idchip'));
   }
 
   // filtroDiasSemana = (d: Date | null): boolean => {
@@ -65,21 +63,19 @@ export class AgendamentosComponent implements OnInit {
 
   definirHorariosLivres(DataFiltrada: Observable<iAgenda[]>) {
     DataFiltrada.subscribe(rec => {
-      for (let x in rec) {
-        for (let i in this.horariosLivres) {
-          if (rec[x].HoraAgendada == this.horariosLivres[i].hora) {
+      for (const x in rec) {
+        for (const i in this.horariosLivres) {
+          if (rec[x].HoraAgendada === this.horariosLivres[i].hora) {
             this.horariosLivres[i].valida = false;
           }
         }
       }
-    })
+    });
   }
 
 
   onSubmit() {
-    let a: iAgenda = this.form.value;
-    console.log(a)
-
+    const a: iAgenda = this.form.value;
     if (!a.Id) {
       this.addAgendamento(a);
     } else {
@@ -90,12 +86,12 @@ export class AgendamentosComponent implements OnInit {
   addAgendamento(a: iAgenda) {
     this.aService.createOrUpdate(this.form.value)
       .then(() => {
-        this.snackBar.open('Agendamento Concluido.', 'OK', { duration: 2500 })
+        this.snackBar.open('Agendamento Concluido.', 'OK', { duration: 2500 });
         this.form.reset();
       })
       .catch(() => {
-        this.snackBar.open('Erro ao submeter o agendamento')
-      })
+        this.snackBar.open('Erro ao submeter o agendamento');
+      });
   }
 
 }

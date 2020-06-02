@@ -35,6 +35,7 @@ import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr)
 import { MatMomentDateModule, MomentDateAdapter, MAT_MOMENT_DATE_FORMATS, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { VermifugosComponent } from './vermifugos/vermifugos.component';
+import { AniAdocaoComponent } from './ani-adocao/ani-adocao.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { VermifugosComponent } from './vermifugos/vermifugos.component';
     HistoricoComponent,
     HistoricoDialog,
     AgendamentosComponent,
-    VermifugosComponent
+    VermifugosComponent,
+    AniAdocaoComponent
   ],
   imports: [
     BrowserModule,

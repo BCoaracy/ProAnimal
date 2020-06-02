@@ -1,114 +1,54 @@
 <div>
-  <mat-tab-group>
-    <mat-tab label="Tutores">
-      <div>
-        <form [formGroup]="tutorForm">
-          <mat-form-field hintLabel="Somente Números">
-            <input placeholder="CPF:" matInput formControlName="Cpf" [errorStateMatcher]="matcher"
-              (keyup)="updateForm($event)">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Nome Completo:" formControlName="Nome" #nome>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <mat-label>Escolha a data</mat-label>
-            <input matInput [min]="dataMin" [matDatepicker]="picker" formControlName='DataNasc'
-              (dateInput)="getDataNasc($event, 'tutor')">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
-          </mat-form-field>
-          <br>
-          <mat-slide-toggle formControlName="Bloqueado">Bloquear</mat-slide-toggle>
-          <br>
-        </form>
-      </div>
-      <mat-divider></mat-divider>
-      <br>
-      <div>
-        <form [formGroup]="enderecoForm">
-          <mat-label>Endereço</mat-label>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Bairro" formControlName="Bairro">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Logradouro" formControlName="Logradouro">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Numero" formControlName="Numero">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Complemento" formControlName="Complemento">
-          </mat-form-field>
-          <br>
-        </form>
-        <button mat-icon-button type="submit" [disabled]="btnSalvar==false || (!tutorForm.valid || !enderecoForm.valid)"
-          (click)="onSubmit()" color="accent">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </mat-tab>
-    <mat-tab label="veterinarios">
-      <div>
-        <form [formGroup]="vetForm">
-          <mat-form-field hintLabel="Somente Números">
-            <input placeholder="CPF:" matInput formControlName="Cpf" [errorStateMatcher]="matcher"
-              (keyup)="updateForm($event)">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Nome Completo:" formControlName="Nome" #nome>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="CRMV:" formControlName="crmv" #nome>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <mat-label>Escolha a data</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName='DataNasc'
-              (dateInput)="getDataNasc($event, 'vet')">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker [dateClass]="dateClass" #picker1></mat-datepicker>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Clinica:" formControlName="Clinica" #nome>
-          </mat-form-field>
-          <br>
-        </form>
-      </div>
-      <mat-divider></mat-divider>
-      <br>
-      <div>
-        <form [formGroup]="enderecoForm">
-          <mat-label>Endereço</mat-label>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Bairro" formControlName="Bairro">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Logradouro" formControlName="Logradouro">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Numero" formControlName="Numero">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Complemento" formControlName="Complemento">
-          </mat-form-field>
-          <br>
-        </form>
-        <button mat-icon-button type="submit" [disabled]="btnSalvar==false || (!vetForm.valid || !enderecoForm.valid)"
-          (click)="onSubmit()" color="accent">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+  <mat-card>
+    <mat-card-title>Cadastro de Tutores</mat-card-title>
+  </mat-card>
+  <form [formGroup]="tutorForm">
+    <mat-form-field hintLabel="Somente Números">
+      <input placeholder="CPF:" matInput formControlName="Cpf" [errorStateMatcher]="matcher"
+        (keyup)="updateForm($event)">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Nome Completo:" formControlName="Nome" #nome>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Escolha a data</mat-label>
+      <input matInput [min]="dataMin" [matDatepicker]="picker" formControlName='DataNasc'
+        (dateInput)="getDataNasc($event, 'tutor')">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-slide-toggle formControlName="Bloqueado">Bloquear</mat-slide-toggle>
+    <br>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<br>
+<div>
+  <form [formGroup]="enderecoForm">
+    <mat-label>Endereço</mat-label>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Bairro" formControlName="Bairro">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Logradouro" formControlName="Logradouro">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Numero" formControlName="Numero">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Complemento" formControlName="Complemento">
+    </mat-form-field>
+    <br>
+  </form>
+  <div>
+    <button mat-mini-fab type="submit" (click)="onSubmit()" class="button_add_botton_right">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
