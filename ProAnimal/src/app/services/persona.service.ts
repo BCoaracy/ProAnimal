@@ -74,6 +74,9 @@ export class PersonaService {
       ref => ref.orderBy('Cpf').startAt(cpf).endAt(cpf + '\uf8ff'))
       .valueChanges();
   }
+  getVeterinarios(): Observable<iVeterinario[]> {
+    return this.veterinariosCollection.valueChanges();
+  }
 
 
   //#endregion

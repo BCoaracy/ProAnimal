@@ -1,0 +1,14 @@
+{
+  "firestore": {
+    "rules": "src\\environment.prod",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "dist\\ProAnimal",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

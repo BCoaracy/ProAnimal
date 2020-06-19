@@ -35,8 +35,10 @@ export class TutoresComponent implements OnInit {
     Id: [undefined],
     Cpf: ['', [Validators.required]],
     Nome: ['', [Validators.required]],
+    Contato: ['', [Validators.required]],
+    Contato2: [''],
     Bloqueado: [false, [Validators.required]],
-    DataNasc: ['', [Validators.required]]
+    DataNasc: ['']
   })
   vetForm = this.fb.group({
     Id: [undefined],
@@ -49,9 +51,9 @@ export class TutoresComponent implements OnInit {
 
   enderecoForm = this.fb.group({
     cpf: [''],
-    Bairro: ['', Validators.required],
-    Logradouro: ['', Validators.required],
-    Numero: ['', Validators.required],
+    Bairro: [''],
+    Logradouro: [''],
+    Numero: [''],
     Complemento: ['']
   })
 
@@ -75,16 +77,17 @@ export class TutoresComponent implements OnInit {
         this.updateTutor(t);
         console.log("updatando!")
       }
-    } else {
-      let v: iVeterinario = this.vetForm.value;
-      if (!v.Id) {
-        this.addVet(v);
-        console.log("adicionando!")
-      } else {
-        this.updateVet(v);
-        console.log("updatando!")
-      }
     }
+    //  else {
+    //   let v: iVeterinario = this.vetForm.value;
+    //   if (!v.Id) {
+    //     this.addVet(v);
+    //     console.log("adicionando!")
+    //   } else {
+    //     this.updateVet(v);
+    //     console.log("updatando!")
+    //   }
+    // }
   }
 
   addTutor(t: iTutores) {

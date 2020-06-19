@@ -40,6 +40,11 @@ export class AnimaisComponent implements OnInit {
     { value: 'Outros' }
   ];
 
+  sexos = [
+    { value: 'Macho' },
+    { value: 'Fêmea' }
+  ]
+
   configForm() {
     this.formCadastro = this.fb.group({
       IdChip: ([undefined]),
@@ -51,7 +56,10 @@ export class AnimaisComponent implements OnInit {
       Observacoes: (''),
       Raca: (['', [Validators.required]]),
       Tamanho: (['', [Validators.required]]),
-      Adocao: (false)
+      Sexo: (['', [Validators.required]]),
+      Pelagem: (['', [Validators.required]]),
+      Adocao: (false),
+      Contato: ['']
     }),
       this.tabela = this.fb.group({
         Nome: (''),
@@ -77,7 +85,7 @@ export class AnimaisComponent implements OnInit {
   ngOnInit() {
     this.configForm();
     this.idFormControl.setValue('');
-    this.animal$ = this.animaisService.getAnimal('0');
+    //this.animal$ = this.animaisService.getAnimal('0');
     this.recebido = false;
   }
 
@@ -112,6 +120,7 @@ export class AnimaisComponent implements OnInit {
     this.formCadastro.controls['Tamanho'].patchValue(animal.Tamanho);
     this.formCadastro.controls['Observacoes'].patchValue(animal.Observacoes);
     this.formCadastro.controls['Adocao'].patchValue(animal.Adocao);
+    this.formCadastro.controls['Contato'].patchValue(animal.Adocao);
     this.updateNomeTutor(animal.Tutor);
   }
 
@@ -190,7 +199,6 @@ export class AnimaisComponent implements OnInit {
 
   abrirHistorico() {
     this.router.navigate(['./animais/historico', this.formCadastro.controls['IdChip'].value]);
-
   }
 
 }

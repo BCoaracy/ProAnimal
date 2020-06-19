@@ -11,7 +11,7 @@
   <mat-form-field>
     <mat-label>{{idtipo}}</mat-label>
     <mat-select formControlName="IdTipo">
-      <mat-option *ngFor="let tipo of listaTipos$ | async" [value]="tipo.Id">
+      <mat-option *ngFor="let tipo of listaTipos$ | async" [value]="tipo.Nome">
         {{tipo.Nome}}
       </mat-option>
     </mat-select>

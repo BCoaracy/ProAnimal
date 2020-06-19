@@ -1,3 +1,6 @@
+<mat-card>
+  <mat-card-title>Agendamento de Procedimentos</mat-card-title>
+</mat-card>
 <form [formGroup]='form'>
 
   <mat-form-field>
@@ -7,7 +10,7 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
   </mat-form-field>
-
+  <br>
   <mat-form-field>
     <mat-label>Horário</mat-label>
     <ng-container>
@@ -20,6 +23,19 @@
       </mat-select>
     </ng-container>
   </mat-form-field>
-
+  <br>
+  <mat-form-field>
+    <mat-label>Técnico Responsável</mat-label>
+    <mat-select formControlName="TecnicoResponsavel">
+      <mat-option *ngFor="let vet of listaVet$ | async" [value]="vet.Nome">
+        {{vet.Nome}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Procedimento" formControlName="Procedimento">
+  </mat-form-field>
+  <br>
   <button mat-raised-button (click)="onSubmit()" color='accent' [disabled]="!form.valid">Agendar</button>
 </form>

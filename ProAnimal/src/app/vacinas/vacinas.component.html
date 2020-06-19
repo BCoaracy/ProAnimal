@@ -38,7 +38,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-tab>
-  <mat-tab label="Buscar">
+  <!-- <mat-tab label="Buscar">
     <div fxLayout="column" fxLayoutAlign="space-around strech" style="padding: 20px;">
       <mat-form-field>
         <input matInput autocomplete="off" placeholder="Buscar Vacina" (keyup)="filter($event)">
@@ -47,5 +47,5 @@
     <ul *ngFor="let item of filterVax$ | async">
       <li>{{item.Nome}}</li>
     </ul>
-  </mat-tab>
+  </mat-tab> -->
 </mat-tab-group>

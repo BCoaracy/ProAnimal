@@ -9,6 +9,8 @@ import { HistoricoComponent } from './animais/historico/historico.component';
 import { VermifugosComponent } from './vermifugos/vermifugos.component';
 import { VeterinariosComponent } from './veterinarios/veterinarios.component';
 import { AniAdocaoComponent } from './ani-adocao/ani-adocao.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { RegisterComponent } from './Auth/Register/register/register.component';
 
 const routes: Routes = [
   { path: 'animais', component: AnimaisComponent },
@@ -20,7 +22,10 @@ const routes: Routes = [
   { path: 'veterinarios', component: VeterinariosComponent },
   { path: 'agendamentos/:idchip', component: AgendamentosComponent },
   { path: 'animais/historico/:idchip', component: HistoricoComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'animais' },
+  { path: 'login', component: LoginComponent },
+  { path: 'Register/register', component: RegisterComponent },
+
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 
 @NgModule({

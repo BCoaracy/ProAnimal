@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { iAnimais } from 'src/app/models/animais.model';
 import { AnimaisService } from 'src/app/services/animais.service';
 import { VacinasService } from 'src/app/services/vacinas.service';
@@ -15,6 +15,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 import { VermifugosService } from 'src/app/services/vermifugos.service';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 
 export interface DialogData {
   Id: string;
@@ -42,7 +43,7 @@ export class HistoricoComponent implements OnInit {
   IdAnimal = '';
   NomeAnimal: string;
   NomeTutor: string;
-  displayedColumns = ['Tipo', 'Data', 'Observacoes'];
+  displayedColumns = ['Tipo', 'Data', 'NomeTipo', 'Observacoes'];
 
   //DataDialog
   idtipo: string;
@@ -59,7 +60,8 @@ export class HistoricoComponent implements OnInit {
     private aService: AnimaisService,
     private hService: HistoricoService,
     public dialog: MatDialog,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private router: Router
 
   ) { }
 
@@ -100,12 +102,16 @@ export class HistoricoComponent implements OnInit {
     });
 
 
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result)
     });
   }
 
+  voltar() {
+    this.router.navigate(['./animais/']);
+  }
 }
 //#region Dialog ----------------------------------------------------------------------------
 @Component({

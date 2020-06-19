@@ -6,6 +6,7 @@
     <mat-form-field hintLabel="Somente Números">
       <input placeholder="CPF:" matInput formControlName="Cpf" [errorStateMatcher]="matcher"
         (keyup)="updateForm($event)">
+      <!-- <input placeholder="CPF:" matInput formControlName="Cpf" (keyup)="updateForm($event)"> -->
     </mat-form-field>
     <br>
     <mat-form-field>
@@ -13,11 +14,11 @@
     </mat-form-field>
     <br>
     <mat-form-field>
-      <mat-label>Escolha a data</mat-label>
-      <input matInput [min]="dataMin" [matDatepicker]="picker" formControlName='DataNasc'
-        (dateInput)="getDataNasc($event, 'tutor')">
+      <mat-label>Data de Nascimento</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName='DataNasc' (dateInput)="getDataNasc($event, 'tutor')">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+
     </mat-form-field>
     <br>
     <mat-slide-toggle formControlName="Bloqueado">Bloquear</mat-slide-toggle>
@@ -47,8 +48,8 @@
     <br>
   </form>
   <div>
-    <button mat-mini-fab type="submit" (click)="onSubmit()" class="button_add_botton_right">
-      <mat-icon>add</mat-icon>
+    <button mat-raised-button color="accent" type="submit" (click)="onSubmit()" class="button_add_botton_right">
+      Registrar <mat-icon>add</mat-icon>
     </button>
   </div>
 </div>

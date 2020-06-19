@@ -12,4 +12,7 @@ export class iAnimais extends Model {
   Raca: string;
   Tamanho: string;
   Adocao: boolean;
+  Contato: string;
+  Pelagem: string;
+  Sexo: string;
 }

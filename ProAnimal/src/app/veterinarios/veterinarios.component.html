@@ -1,4 +1,7 @@
 <div>
+  <mat-card>
+    <mat-card-title>Cadastro de Veterinários</mat-card-title>
+  </mat-card>
   <form [formGroup]="vetForm">
     <mat-form-field hintLabel="Somente Números">
       <input placeholder="CPF:" matInput formControlName="cpf" [errorStateMatcher]="matcher"
@@ -14,7 +17,7 @@
     </mat-form-field>
     <br>
     <mat-form-field>
-      <mat-label>Escolha a data</mat-label>
+      <mat-label>Data de Nascimento</mat-label>
       <input matInput [matDatepicker]="picker1" formControlName='DataNasc' (dateInput)="getDataNasc($event)">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker [dateClass]="dateClass" #picker1></mat-datepicker>
@@ -48,8 +51,9 @@
     </mat-form-field>
     <br>
   </form>
-  <button mat-mini-fab type="submit" [disabled]="btnSalvar==false || (!vetForm.valid || !enderecoForm.valid)"
-    (click)="onSubmit()" class="button_add_botton_right">
-    <mat-icon>add</mat-icon>
+  <button mat-raised-button color="accent" type="submit"
+    [disabled]="btnSalvar==false || (!vetForm.valid || !enderecoForm.valid)" (click)="onSubmit()"
+    class="button_add_botton_right">
+    Registrar <mat-icon>add</mat-icon>
   </button>
 </div>

@@ -1,0 +1,72 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div align="center" fxLayout="row" fxLayoutAlign="center center" class="register-form">
+    <h3 class="card-title text-center">
+      <a routerLink="/inicio" href="#"> <i class="fas fa-tasks fa-2x "></i>
+      </a>Bem Vindo! - Faça o Login</h3>
+    <div class="form-signin">
+      <form [formGroup]="loginForm">
+        <mat-form-field appearance="fill" class="tamanho">
+          <mat-label>Email</mat-label>
+          <input matInput [errorStateMatcher]="matcher" placeholder="Ex. exemplo@examplo.com" formControlName="email">
+          <mat-hint>Informe um email válido!</mat-hint>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            email válido!
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email é <strong>Necessário</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="tamanho">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha" minlength="6" maxlength="30">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <br>
+        <button mat-flat-button (click)="logar()" color="primary" class="botoes">Logar</button>
+        <br>
+        <button mat-flat-button (click)="enviaLink()" color="primary" class="botoes">Recuperar</button>
+        <br>
+        <button mat-flat-button (click)="cadastro()" color="accent" class="botoes">Criar Conta</button>
+        <!-- <fieldset>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input class="form-control" name="emailControle" #emailControle="ngModel" type="text"
+                      placeholder="Informe o Email" [(ngModel)]="email" maxlength="60" email required>
+                    <div *ngIf="emailControle.invalid" class="text-danger">
+                      <div *ngIf="emailControle.errors?.required">Email é obrigatório</div>
+                      <div *ngIf="emailControle.errors?.email">Email inválido</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Senha</label>
+                    <input name="passwordControl" #passwordControl="ngModel" [(ngModel)]="senha" type="password"
+                      class="form-control" placeholder="Senha" required minlength="6" maxlength="30">
+                    <span [hidden]="passwordControl.pristine || !passwordControl.errors?.required"
+                      class="text-danger">Senha
+                      obrigatória!</span>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-info btn-block" (click)="logar()">
+                      <i class="fas fa-sign-in-alt"></i> LOGAR</button>
+
+                    <h6 class="text-center"><strong>OU</strong> </h6>
+                    <button type="submit" (click)="enviaLink()" class="btn btn-lg btn-success btn-block text-uppercase">
+                      <i class="far fa-envelope"></i> Recuperar</button>
+                  </div>
+                </fieldset> -->
+        <br>
+        <div class="alert alert-dismissible alert-danger" *ngIf="mensagem && !emailEnviado">
+          {{mensagem}}
+        </div>
+        <div class="alert alert-dismissible alert-info" *ngIf="emailEnviado">
+          Foi enviando um email para <strong>{{email}}</strong>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

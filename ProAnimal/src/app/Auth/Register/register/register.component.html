@@ -1,0 +1,65 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div align="center" fxLayout="row" fxLayoutAlign="center center" class="register-form">
+
+    <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <mat-card class="mat-elevation-z8" flex="80">
+
+        <mat-card-title>Registre-se</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
+
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <mat-form-field fxFlex="100">
+              <input matInput type="email" formControlName="email" class="form-control" value="" autocomplete="email"
+                placeholder="E-mail">
+            </mat-form-field>
+            <br>
+            <mat-form-field fxFlex="100">
+              <input matInput type="text" formControlName="cpf" class="form-control" value="" placeholder="cpf"
+                (keyup)="checkCpf($event)" autocomplete="off">
+            </mat-form-field>
+            <br>
+            <mat-checkbox formControlName="veterinario" value="false" class="form-control">Veterinario</mat-checkbox>
+
+            <div *ngIf="registerForm.value.veterinario==true">
+              <mat-form-field>
+                <input matInput type="text" formControlName="crmv" value="" placeholder="CRMV">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+
+            <mat-form-field fxFlex="45">
+              <input matInput type="password" formControlName="senha1" type="password" autocomplete="off">
+              <mat-placeholder>
+                <mat-icon>lock</mat-icon> senha
+              </mat-placeholder>
+            </mat-form-field>
+            <br>
+            <mat-form-field fxFlex="45">
+              <input matInput type="password" formControlName="senha2" class="form-control" autocomplete="off">
+              <mat-placeholder>
+                <mat-icon>lock_outline</mat-icon>confirmar senha
+              </mat-placeholder>
+            </mat-form-field>
+
+          </div>
+
+
+          <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-button color="primary" type="submit" [disabled]="!registerForm.valid || cpfValido==true">
+              <mat-icon>done</mat-icon>&nbsp;Registrar
+            </button>
+          </div>
+
+
+
+        </mat-card-content>
+      </mat-card>
+    </form>
+
+
+  </div>
+</div>

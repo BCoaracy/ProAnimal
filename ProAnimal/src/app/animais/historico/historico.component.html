@@ -14,6 +14,10 @@
       <th mat-header-cell *matHeaderCellDef> Data: </th>
       <td mat-cell *matCellDef="let row"> {{row.Data}} </td>
     </ng-container>
+    <ng-container matColumnDef="NomeTipo">
+      <th mat-header-cell *matHeaderCellDef> Ocorrido: </th>
+      <td mat-cell *matCellDef="let row"> {{row.IdTipo}} </td>
+    </ng-container>
     <ng-container matColumnDef="Observacoes">
       <th mat-header-cell *matHeaderCellDef> Observação: </th>
       <td mat-cell *matCellDef="let row"> {{row.Observacoes}} </td>
@@ -22,7 +26,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <br>
-  <button mat-raised-button (click)="onClickNovo()" class="button_on_right">Novo</button>
-  <button mat-raised-button  >Voltar</button>
+  <button mat-raised-button (click)="onClickNovo()" color="primary" class="button_on_right">Novo</button>
+  <button mat-raised-button (click)="voltar()" color="accent">Voltar</button>
 
 </div>

@@ -6,6 +6,8 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { MatSnackBar, MAT_DATE_LOCALE } from '@angular/material';
 import { AgendamentoService } from '../services/agendamento.service';
 import { ActivatedRoute } from '@angular/router';
+import { PersonaService } from '../services/persona.service';
+import { iVeterinario } from '../models/veterinario.model';
 
 
 
@@ -20,7 +22,8 @@ export class AgendamentosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private aService: AgendamentoService,
+    public aService: AgendamentoService,
+    public pService: PersonaService,
     private router: ActivatedRoute
   ) { }
 
@@ -32,6 +35,7 @@ export class AgendamentosComponent implements OnInit {
   { hora: '11:00', valida: true }, { hora: '12:00', valida: true }, { hora: '13:00', valida: true }, { hora: '14:00', valida: true },
   { hora: '15:00', valida: true }, { hora: '16:00', valida: true }, { hora: '17:00', valida: true }, { hora: '18:00', valida: true }];
 
+  listaVet$: Observable<iVeterinario[]>;
 
   configForm() {
     this.form = this.fb.group({
@@ -42,13 +46,15 @@ export class AgendamentosComponent implements OnInit {
       DataAgendamento: new FormControl(undefined),
       ProcedimentoRealizado: new FormControl(false),
       Bloquear: new FormControl(false),
-      TecnicoResponsavel: new FormControl(undefined)
+      TecnicoResponsavel: new FormControl(undefined),
+      Procedimento: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit() {
     this.configForm();
     this.IdChip = (this.router.snapshot.paramMap.get('idchip'));
+    this.listaVet$ = this.pService.getVeterinarios();
   }
 
   // filtroDiasSemana = (d: Date | null): boolean => {
@@ -77,13 +83,13 @@ export class AgendamentosComponent implements OnInit {
   onSubmit() {
     const a: iAgenda = this.form.value;
     if (!a.Id) {
-      this.addAgendamento(a);
+      this.addAgendamento();
     } else {
 
     }
   }
 
-  addAgendamento(a: iAgenda) {
+  addAgendamento() {
     this.aService.createOrUpdate(this.form.value)
       .then(() => {
         this.snackBar.open('Agendamento Concluido.', 'OK', { duration: 2500 });

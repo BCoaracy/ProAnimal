@@ -12,7 +12,7 @@
           <br>
         </form>
 
-        <div>
+        <div *ngIf="animal$">
           <form>
             <table mat-table [dataSource]="animal$ | async" style="width: 100%;">
               <ng-container matColumnDef="Nome">
@@ -21,7 +21,7 @@
               </ng-container>
               <ng-container matColumnDef="Tutor">
                 <th mat-header-cell *matHeaderCellDef> Tutor: </th>
-                <td mat-cell *matCellDef="let row"> {{row.Tutor}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.NomeTutor}} </td>
               </ng-container>
               <ng-container matColumnDef="DataNasc">
                 <th mat-header-cell *matHeaderCellDef> DataNasc: </th>
@@ -36,7 +36,7 @@
                 <td mat-cell *matCellDef="let row"> {{row.Raca}} </td>
               </ng-container>
               <ng-container matColumnDef="Tamanho">
-                <th mat-header-cell *matHeaderCellDef> Tamanho: </th>
+                <th mat-header-cell *matHeaderCellDef> Porte: </th>
                 <td mat-cell *matCellDef="let row"> {{row.Tamanho}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
@@ -56,12 +56,16 @@
               </ng-container>
               <ng-container matColumnDef="Observacao">
                 <th mat-header-cell *matHeaderCellDef> Observação: </th>
-                <td mat-cell *matCellDef="let row"> {{row.Observacao}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.Observacoes}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumnsHist; sticky: true"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumnsHist;"></tr>
             </table>
           </div>
+          <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
+            (click)="abrirAgendamento()">Agendar</button>
+          <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
+            (click)="abrirHistorico()">Historico</button>
         </div>
       </div>
     </mat-tab>
@@ -74,18 +78,8 @@
             <input matInput placeholder="Microchip" formControlName="IdChip">
           </mat-form-field>
           <br>
-
           <mat-form-field>
-            <input type="text" matInput placeholder="CPF do tutor" formControlName="Tutor"
-              (keyup)="checkCpfTutorExist($event)">
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="NomeTutor" formControlName="NomeTutor">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput type="date" placeholder="DataNasc" formControlName="DataNasc">
+            <input matInput placeholder="Nome" formControlName="Nome">
           </mat-form-field>
           <br>
           <mat-form-field>
@@ -97,11 +91,11 @@
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Nome" formControlName="Nome">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Observações" formControlName="Observacoes">
+            <mat-select formControlName="Sexo" placeholder="Sexo">
+              <mat-option *ngFor="let sexo of sexos" [value]="sexo.value">
+                {{sexo.value}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
@@ -109,22 +103,58 @@
           </mat-form-field>
           <br>
           <mat-form-field>
-            <mat-select formControlName="Tamanho" placeholder="Tamanho">
+            <input matInput placeholder="Cor do pelo" formControlName="Pelagem">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-select formControlName="Tamanho" placeholder="Porte">
               <mat-option *ngFor="let tamanho of tamanhos" [value]="tamanho.value">
                 {{tamanho.value}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <br>
+          <mat-form-field>
+            <mat-select formControlName="Especie" placeholder="Especie">
+              <mat-option *ngFor="let especie of especies" [value]="especie.value">
+                {{especie.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput type="date" placeholder="DataNasc" formControlName="DataNasc">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input type="text" matInput placeholder="CPF do tutor" formControlName="Tutor"
+              (keyup)="checkCpfTutorExist($event)">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="NomeTutor" formControlName="NomeTutor">
+          </mat-form-field>
+          <br>
+
+          <mat-form-field>
+            <input matInput placeholder="Observações" formControlName="Observacoes">
+          </mat-form-field>
+          <br>
+
           <mat-slide-toggle formControlName="Adocao">Animal para Adoção?</mat-slide-toggle>
+          <div *ngIf="formCadastro.value.Adocao==true">
+            <mat-form-field>
+              <input matInput type="text" formControlName="Contato" value="" placeholder="Contato: (99) 99999-9999">
+            </mat-form-field>
+          </div>
         </form>
-        <button mat-fab (click)="onSubmit()" color="accent" [disabled]="!formCadastro.valid">
+        <button mat-flat-button (click)="onSubmit()" color="accent" [disabled]="!formCadastro.valid">
           <mat-icon>add</mat-icon>
+          Cadastrar
         </button>
-        <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
+        <!-- <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
           (click)="abrirAgendamento()">Agendar</button>
         <button mat-flat-button color="primary" [disabled]="!formCadastro.valid"
-          (click)="abrirHistorico()">Historico</button>
+          (click)="abrirHistorico()">Historico</button> -->
       </div>
     </mat-tab>
   </mat-tab-group>

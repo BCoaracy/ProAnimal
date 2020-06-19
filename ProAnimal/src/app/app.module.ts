@@ -4,6 +4,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Import Angular Material
 import { MatToolbarModule, MatDividerModule, MatButtonModule, MatTableModule, MatCheckboxModule, MatSelectModule, MatSidenavModule, MatCardModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
@@ -17,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimaisComponent } from './animais/animais.component';
 import { AnimaisService } from './services/animais.service';
@@ -36,6 +37,8 @@ registerLocaleData(ptBr)
 import { MatMomentDateModule, MomentDateAdapter, MAT_MOMENT_DATE_FORMATS, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { VermifugosComponent } from './vermifugos/vermifugos.component';
 import { AniAdocaoComponent } from './ani-adocao/ani-adocao.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { RegisterComponent } from './Auth/Register/register/register.component';
 
 
 @NgModule({
@@ -51,11 +54,12 @@ import { AniAdocaoComponent } from './ani-adocao/ani-adocao.component';
     HistoricoDialog,
     AgendamentosComponent,
     VermifugosComponent,
-    AniAdocaoComponent
+    AniAdocaoComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
@@ -77,7 +81,9 @@ import { AniAdocaoComponent } from './ani-adocao/ani-adocao.component';
     MaterialModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    AngularFireAuthModule,
+    AppRoutingModule,
   ],
   entryComponents: [
     HistoricoDialog
