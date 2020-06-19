@@ -11,16 +11,17 @@ import { VeterinariosComponent } from './veterinarios/veterinarios.component';
 import { AniAdocaoComponent } from './ani-adocao/ani-adocao.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/Register/register/register.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'animais', component: AnimaisComponent },
   { path: 'animaisAdocao', component: AniAdocaoComponent },
-  { path: 'vacinas', component: VacinasComponent },
-  { path: 'vermifugos', component: VermifugosComponent },
-  { path: 'doencas', component: DoencasComponent },
-  { path: 'tutores', component: TutoresComponent },
-  { path: 'veterinarios', component: VeterinariosComponent },
-  { path: 'agendamentos/:idchip', component: AgendamentosComponent },
+  { path: 'vacinas', component: VacinasComponent, canActivate: [AuthGuardService] },
+  { path: 'vermifugos', component: VermifugosComponent, canActivate: [AuthGuardService]  },
+  { path: 'doencas', component: DoencasComponent, canActivate: [AuthGuardService]  },
+  { path: 'tutores', component: TutoresComponent, canActivate: [AuthGuardService]  },
+  { path: 'veterinarios', component: VeterinariosComponent, canActivate: [AuthGuardService]  },
+  { path: 'agendamentos/:idchip', component: AgendamentosComponent, canActivate: [AuthGuardService]  },
   { path: 'animais/historico/:idchip', component: HistoricoComponent },
   { path: 'login', component: LoginComponent },
   { path: 'Register/register', component: RegisterComponent },

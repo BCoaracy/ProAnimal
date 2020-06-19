@@ -21,6 +21,15 @@
         </mat-icon>
       </button>
       <span>ChiPet - Animal Care</span>
+      <button mat-icon-button routerLink="../animais">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-icon-button routerLink="../">
+        <mat-icon>input</mat-icon>
+      </button>
+      <button mat-icon-button (click)="logOut()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

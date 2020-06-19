@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, throwError } from 'rxjs';
+import { Observable, from, throwError, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { User } from '../Auth/user';
-import { switchMap, catchError } from 'rxjs/operators';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable({
@@ -26,8 +26,9 @@ export class AuthenticationService {
   login(email: string, password: string): Observable<User> {
     return from(this.afAuth.auth.signInWithEmailAndPassword(email, password))
     .pipe(
-      switchMap((u: firebase.auth.UserCredential)=> this.userCollection.doc<User>(u.user.uid).valueChanges())
-    )
+      switchMap((u: firebase.auth.UserCredential)=> this.userCollection.doc<User>(u.user.uid).valueChanges()),
+      catchError((error) => throwError(error))
+    );
   }
 
   logout(): Promise<void> {
@@ -48,6 +49,18 @@ export class AuthenticationService {
             .then(() => true)
         ),
         catchError((error) => throwError(error))
+      );
+  }
+
+  getUser(): Observable<User>{
+    return this.afAuth.authState
+      .pipe(
+        switchMap(u => (u) ? this.userCollection.doc<User>(u.uid).valueChanges() : of(null))
+      )
+  }
+  getAuthenticated(): Observable<boolean>{
+    return this.afAuth.authState
+      .pipe(map(u => (u) ? true : false)
       )
   }
 

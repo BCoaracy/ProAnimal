@@ -58,9 +58,9 @@ export class LoginComponent implements OnInit {
         return
       }
       this.authServ.login(this.email, this.senha)
-        .then(() => {
+        .subscribe((u) => {
           this.router.navigate(['/animais'])
-        }).catch(erro => {
+        }, (erro => {
           let detalhes = '';
           switch (erro.code) {
             case 'auth/user-not-found': {
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
             }
           }
           this.mensagem = `Erro	ao	logar.	${detalhes}`;
-        });
+        }));
 
     } catch (erro) {
       this.mensagem = 'Erro ao logar. Detalhes:  ${erro}';
@@ -112,8 +112,9 @@ export class LoginComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  cadastro() {
+  cadastrar() {
     this.router.navigate(['./Register/register']);
   }
+
 
 }
